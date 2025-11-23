@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 /// 홈 화면 상단의 5개 아이콘 네비게이션 바
 class TopIcon extends StatelessWidget {
+  /// 아이콘 키
   const TopIcon({super.key});
 
   @override
@@ -29,7 +32,7 @@ class TopIcon extends StatelessWidget {
     return InkWell(
       onTap: () {
         // 5. (구현 필요) 각 아이콘 탭했을 때 동작
-        print('$label 탭됨');
+        log('$label 탭됨');
       },
       borderRadius: BorderRadius.circular(8), // 탭 효과를 위한 둥근 모서리
       child: Padding(

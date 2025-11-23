@@ -1,14 +1,16 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 import 'package:template/features/weather/models/weather_model.dart';
 
 /// (View) '14일간 예보' 가로 스크롤 리스트 위젯
 class DailyForecastWidget extends StatelessWidget {
-  final List<DailyForecastModel> dailyForecast;
-
   const DailyForecastWidget({
     super.key,
     required this.dailyForecast,
   });
+
+  final List<DailyForecastModel> dailyForecast;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class DailyForecastWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 final day = dailyForecast[index];
                 // 3. 오늘 날짜(isSelected)인지 확인
-                final bool isSelected = day.isSelected;
+                final isSelected = day.isSelected;
 
                 // 4. 각 날짜 카드
                 return Container(

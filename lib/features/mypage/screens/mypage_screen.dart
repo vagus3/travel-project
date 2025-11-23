@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 
 /// '마이페이지' 탭에 해당하는 메인 화면
@@ -57,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
             // --- 3. 설정 섹션 ---
             _buildSectionHeader('설정'), // 섹션 제목
-            Container(
+            ColoredBox(
               color: Colors.white, // 설정 항목들은 흰색 배경
               child: Column(
                 children: [
@@ -69,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
             // --- 4. 고객지원 섹션 ---
             _buildSectionHeader('고객지원'), // 섹션 제목
-            Container(
+            ColoredBox(
               color: Colors.white,
               child: Column(
                 children: [
@@ -88,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   /// 1. 프로필 섹션 (프로필 사진, 이름, 이메일, 버튼)
   Widget _buildProfileSection(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.all(24),
       width: double.infinity,
       // 8. 프로필 섹션은 AppBar와 동일한 배경색
       color: Colors.grey[50],
@@ -121,7 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               foregroundColor: Colors.black87, // 버튼 글자색
               elevation: 0, // 그림자 제거
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(12),
               ),
             ),
             child: const Text('프로필 수정'),
@@ -133,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   /// 2. 나의 활동 섹션 (TabBar + TabBarView)
   Widget _buildMyActivitiesSection(BuildContext context) {
-    return Container(
+    return ColoredBox(
       color: Colors.white, // 탭 영역은 흰색 배경
       child: Column(
         children: [
@@ -158,7 +160,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 // --- 탭 1: 작성한 리뷰 ---
                 // (리뷰가 300px보다 많아지면 이 안에서 스크롤됨)
                 ListView(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16),
                   children: [
                     // (임시 데이터)
                     _buildReviewCard(
@@ -200,13 +202,13 @@ class _ProfileScreenState extends State<ProfileScreen>
     return Card(
       elevation: 0, // 그림자 없음
       color: Colors.grey[50], // 카드 배경색
-      margin: const EdgeInsets.only(bottom: 12.0),
+      margin: const EdgeInsets.only(bottom: 12),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12),
         child: Row(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(8),
               child: Image.network(
                 imageUrl,
                 width: 70,
@@ -247,7 +249,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   /// 4. "설정", "고객지원" 섹션의 제목 헬퍼
   Widget _buildSectionHeader(String title) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 8.0),
+      padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
       child: Text(
         title,
         style: TextStyle(

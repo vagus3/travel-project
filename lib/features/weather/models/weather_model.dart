@@ -1,4 +1,6 @@
-import 'package.flutter/material.dart';
+// ignore_for_file: public_member_api_docs
+
+import 'package:flutter/material.dart';
 
 /// 1. 현재 날씨 모델
 class CurrentWeatherModel {

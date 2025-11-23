@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
 
             // 8. 세로 피드 목록 (ListView.builder 사용 권장)
             // (참고) 이 위젯은 곧 생성해 드립니다.
-            TravelPostCard(
+            const TravelPostCard(
               imageUrl:
                   'https://images.unsplash.com/photo-1548625149-fc4a874b73e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzk5ODV8MHwxfHNlYXJjaHwxfHxyZWQlMjBqYXBhbmVzZSUyMHNocmluZXxlbnwwfHx8fDE3MzE2Nzk3NDZ8MA&ixlib=rb-4.0.3&q=80&w=1080', // 교토 사시미 이미지 (대체)
               title: '교토 현지인만 아는 맛집 리스트 공유합니다.',
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
               profileImageUrl:
                   'https://placehold.co/100x100/E0E0E0/BDBDBD?text=P',
             ),
-            TravelPostCard(
+            const TravelPostCard(
               imageUrl:
                   'https://images.unsplash.com/photo-1549468057-5b7fa1a41d7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzk5ODV8MHwxfHNlYXJjaHwxfHxvcyVFQSVCQSVCN2ElMjBjYXN0bGUlMjBuaWdodHxlbnwwfHx8fDE3MzE2Nzk3NzZ8MA&ixlib=rb-4.0.3&q=80&w=1080', // 오사카성 (대체)
               title: '오사카에서 3박 4일 여행 코스 추천해줘요!',
@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
               profileImageUrl:
                   'https://placehold.co/100x100/C5CAE9/9FA8DA?text=O',
             ),
-            TravelPostCard(
+            const TravelPostCard(
               imageUrl:
                   'https://images.unsplash.com/photo-1547738021-87c2b54c8b67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzk5ODV8MHwxfHNlYXJjaHwxfHx0b2t5byUyMGRpc25leSUyMGZpcmV3b3Jrc3xlbnwwfHx8fDE3MzE2Nzk3OTh8MA&ixlib=rb-4.0.3&q=80&w=1080', // 디즈니랜드 (대체)
               title: '도쿄 디즈니랜드 꿀팁 대방출! (스압주의)',

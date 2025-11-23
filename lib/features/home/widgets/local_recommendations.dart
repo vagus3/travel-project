@@ -1,12 +1,17 @@
+// import 'dart:nativewrappers/_internal/vm/lib/math_patch.dart';
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 /// 홈 화면의 '현지 추천 장소' 가로 스크롤 위젯
 class LocalRecommendations extends StatelessWidget {
+  /// 현지 장소 추천 배너 업데이트
   const LocalRecommendations({super.key});
 
   // (임시) 추천 장소 데이터
   // (실제 앱에서는 이 데이터를 Firebase 등에서 가져와야 합니다)
-  static const List<Map<String, String>> _recommendations = [
+  static const _recommendations = [
     {
       'imageUrl':
           'https://images.unsplash.com/photo-1545569341-9921e141119c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzk5ODV8MHwxfHNlYXJjaHwxfHxhcmFzaGl5YW1hJTIwYmFtYm9vJTIwZ3JvdmV8ZW58MHx8fHwxNzMxNjgxMTE2fDA&ixlib=rb-4.0.3&q=80&w=1080', // 아라시야마 대나무 숲 (대체)
@@ -59,7 +64,7 @@ class LocalRecommendations extends StatelessWidget {
       child: InkWell(
         onTap: () {
           // 9. (구현 필요) 카드 클릭 시 동작
-          print('$title 탭됨');
+          log('$title 탭됨');
         },
         borderRadius: BorderRadius.circular(12),
         child: ClipRRect(
@@ -74,7 +79,9 @@ class LocalRecommendations extends StatelessWidget {
                 fit: BoxFit.cover, // 이미지가 카드를 꽉 채우고 비율 유지
                 // 13. 이미지 로딩 중/실패 시 처리
                 loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
+                  if (loadingProgress == null) {
+                    return child;
+                  }
                   return const Center(child: CircularProgressIndicator());
                 },
                 errorBuilder: (context, error, stackTrace) {
@@ -89,9 +96,9 @@ class LocalRecommendations extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.black.withOpacity(0),
+                      Colors.black.withValues(alpha: 0),
                       Colors.transparent,
-                      Colors.black.withOpacity(0),
+                      Colors.black.withValues(alpha: 0),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,

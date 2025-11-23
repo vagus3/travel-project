@@ -72,7 +72,7 @@ class HourlyForecastWidget extends StatelessWidget {
       color: Colors.grey[50],
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -152,7 +152,7 @@ class HourlyForecastWidget extends StatelessWidget {
           getTooltipColor: (LineBarSpot touchedSpot) {
             return Colors.blueGrey; // 툴팁 배경색 반환
           },
-          tooltipRoundedRadius: 8.0,
+          tooltipRoundedRadius: 8,
         ),
       ),
       // 4. 그리드(격자) 설정
@@ -212,7 +212,7 @@ class HourlyForecastWidget extends StatelessWidget {
   Widget _xAxisFormatter(double value, TitleMeta meta) {
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      space: 8.0,
+      space: 8,
       child: Text(
         '${value.toInt().toString().padLeft(2, '0')}:00',
         style: const TextStyle(color: Colors.grey, fontSize: 10),

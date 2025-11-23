@@ -1,14 +1,17 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 import 'package:template/features/weather/models/weather_model.dart';
 
 /// (View) '서울', '12°' 등 상단의 현재 날씨 정보 위젯
 class CurrentWeatherWidget extends StatelessWidget {
-  final CurrentWeatherModel currentWeather;
-
   const CurrentWeatherWidget({
     super.key,
+
     required this.currentWeather,
   });
+
+  final CurrentWeatherModel currentWeather;
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +65,12 @@ class CurrentWeatherWidget extends StatelessWidget {
 
         // 5. 체감온도, 습도, 풍속 카드
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Card(
             color: Colors.grey[100], // 카드 배경색
             elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.0),
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(

@@ -1,6 +1,9 @@
-import 'package.flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/weather_models.dart';
+// ignore_for_file: public_member_api_docs
+
+import 'package:flutter/material.dart';
+//import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
+import 'package:template/features/weather/models/weather_model.dart';
 
 /// 이 컨트롤러가 관리할 상태(State)
 class WeatherState {
@@ -44,7 +47,7 @@ class WeatherController extends StateNotifier<WeatherState> {
     await Future.delayed(const Duration(milliseconds: 500));
 
     // --- 1. 임시 현재 날씨 데이터 ---
-    final current = const CurrentWeatherModel(
+    const current = CurrentWeatherModel(
       location: '서울',
       date: '11월 24일 (금)',
       icon: Icons.wb_sunny_rounded,
@@ -118,7 +121,7 @@ class WeatherController extends StateNotifier<WeatherState> {
       const HourlyForecastModel(hour: 12, cloudCover: 0.5, precipitation: 0.1),
       const HourlyForecastModel(hour: 15, cloudCover: 0.8, precipitation: 0.2),
       const HourlyForecastModel(hour: 18, cloudCover: 0.6, precipitation: 0.4),
-      const HourlyForecastModel(hour: 21, cloudCover: 0.4, precipitation: 0.0),
+      const HourlyForecastModel(hour: 21, cloudCover: 0.4, precipitation: 0),
     ];
 
     // --- 4. 상태 업데이트 -> UI 새로고침 ---
