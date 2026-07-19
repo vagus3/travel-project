@@ -1,137 +1,240 @@
-// import 'dart:nativewrappers/_internal/vm/lib/math_patch.dart';
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:template/core/themes/app_colors.dart';
+import 'package:template/core/themes/app_responsive.dart';
+import 'package:template/features/home/screens/place_detail_screen.dart';
 
-/// 홈 화면의 '현지 추천 장소' 가로 스크롤 위젯
+/// '현지 추천 장소' 가로 스크롤 위젯
 class LocalRecommendations extends StatelessWidget {
-  /// 현지 장소 추천 배너 업데이트
+  /// '현지 추천 장소' 가로 스크롤 위젯
   const LocalRecommendations({super.key});
 
-  // (임시) 추천 장소 데이터
-  // (실제 앱에서는 이 데이터를 Firebase 등에서 가져와야 합니다)
-  static const _recommendations = [
+  static const _recommendations = <Map<String, Object>>[
     {
-      'imageUrl':
-          'https://images.unsplash.com/photo-1545569341-9921e141119c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzk5ODV8MHwxfHNlYXJjaHwxfHxhcmFzaGl5YW1hJTIwYmFtYm9vJTIwZ3JvdmV8ZW58MHx8fHwxNzMxNjgxMTE2fDA&ixlib=rb-4.0.3&q=80&w=1080', // 아라시야마 대나무 숲 (대체)
+      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCWSt2n8d0UpTjiuwSsuJE9WoroXrWdWl27Lb3WgRrtDtifF5BHUYX0aMtXX1LLNsWmlXTTSI8lLFSwTmYLQtDCQrX8z7L8dLAWEAjfRqdAiY934sIZAQ_UieUC-XoQ-XSSPRljRlRbGO7Nt_FZcBloj8v958lwqTMSncpVY-gxtRQp3fRNCfA8ZqWkKsYuBlFLgTQggIee9eNzttFz4BkmRCohFgkZIQbtZJZ0UtWjn4t5wDyGE-FL8AtNDgExI4uofYCLiZZ4WIQs',
       'title': '후시미 이나리 신사',
+      'location': '교토 · 후시미구',
+      'rating': 4.9,
+      'reviewCount': 5820,
+      'hours': '24시간 개방',
+      'fee': '입장 무료',
+      'description': '수천 개의 붉은 도리이 게이트가 이어지는 신비로운 산길로 유명한 신사입니다. '
+          '이나리산 전체가 신사 영역으로, 정상까지 약 2~3시간이 소요되는 하이킹 코스를 따라 걸으며 '
+          '일본 전통 신앙과 자연을 동시에 체험할 수 있습니다.',
+      'tags': ['신사', '하이킹', '포토스팟', '역사', '무료입장'],
+      'tips': [
+        {'icon': '🌅', 'text': '이른 아침 방문 시 인파가 적어 여유롭게 감상 가능'},
+        {'icon': '📸', 'text': '도리이 터널 안에서 역광 사진이 인상적'},
+        {'icon': '👟', 'text': '정상까지 걷는 경우 운동화 필수'},
+      ],
     },
     {
-      'imageUrl':
-          'https://images.unsplash.com/photo-1545904832-51b80d09d8d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzk5ODV8MHwxfHNlYXJjaHwxfHxraW5rYWt1amklMjB0ZW1wbGV8ZW58MHx8fHwxNzMxNjgxMTM2fDA&ixlib=rb-4.0.3&q=80&w=1080', // 금각사 (대체)
+      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuAdmNyqIK80mWXaNbl4M9r6P4nwBpTW8HWXg2Cl058P2qv94jZdIO6amXwX2bWinL081CIlPa5bbS4BDBUcoaVF4CeY8ELYh7CayS6aOSvwu031iGlikj3ZKrk9m9npbHZGe6qW7_DsEimpiMuJVPds5AA09A_r9R5873gP9mtCg6BvZcw4pOBktUjQsho8A8kQrst4eQxfNJPONc51pNBPhT-GK_2Z5CuMNXr-J4jkPV-Zg-Gut1f6vxwN-VJN5_jFdbEnFgMWbyFr',
       'title': '금각사 (킨카쿠지)',
+      'location': '교토 · 키타구',
+      'rating': 4.8,
+      'reviewCount': 7430,
+      'hours': '09:00 ~ 17:00',
+      'fee': '성인 500엔',
+      'description': '금박으로 뒤덮인 사리전이 연못에 비치는 모습이 압도적인 세계문화유산입니다.',
+      'tags': ['세계문화유산', '사원', '정원', '역사', '포토스팟'],
+      'tips': [
+        {'icon': '⛅', 'text': '맑은 날 연못에 비치는 금각이 가장 아름다움'},
+        {'icon': '🎋', 'text': '겨울 적설 시즌에 방문하면 특별한 풍경 연출'},
+        {'icon': '🚌', 'text': '교토역에서 버스로 약 40분 소요'},
+      ],
     },
     {
-      'imageUrl':
-          'https://images.unsplash.com/photo-1554797589-7246187063f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzk5ODV8MHwxfHNlYXJjaHwxfHx0b2t5byUyMHNreXRyZWV8ZW58MHx8fHwxNzMxNjgxMTYyfDA&ixlib=rb-4.0.3&q=80&w=1080', // 도쿄 스카이트리 (대체)
-      'title': '도쿄 스카이트리',
+      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCoOaBHK_HQ1nuagP2kxm-TH3YBIH2cxwEiZ-T8Fqk_gdN-O970DadR22lQNUB3UMwdapYIespcxLr_pRXDL8OJteK9p43aTL5qaU2s0LZvohVkiq4cbvCxmjNuZ7e4mBEKWEjOZAyH-cMB7C7_MtfE1eX9xA-ENxQdg-C6FhkUFtaKldt4mLVTxGZ5S_XnMVf97_zXMvXunZVZ_OTZilDYeCROtcUE16GWS2WPoJtGjdp50WyfjujSON4e9pC-wOfXbqgT1-KPxx5G',
+      'title': '아라시야마 대나무 숲',
+      'location': '교토 · 우쿄구',
+      'rating': 4.7,
+      'reviewCount': 4120,
+      'hours': '24시간 개방',
+      'fee': '입장 무료',
+      'description': '하늘을 향해 쭉 뻗은 대나무들이 만들어내는 녹색 터널로, 교토에서 가장 이국적인 풍경 중 하나입니다.',
+      'tags': ['자연', '대나무', '산책', '포토스팟', '무료입장'],
+      'tips': [
+        {'icon': '🌿', 'text': '이른 아침이 조용하고 빛이 가장 아름다운 시간'},
+        {'icon': '🚂', 'text': '사가노 관광열차와 함께 코스로 즐기면 최고'},
+        {'icon': '☔', 'text': '비 온 후 촉촉한 대나무 숲도 색다른 매력'},
+      ],
+    },
+    {
+      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFoA2UwWEes8xJabLIpixkZ-R_muV8L7yHsYJZY0iBp9a94TEB759nk5D9bvVj5ZrfnGUQwZHVaFvpCe3EkK_OIcv7Q7c2hfD1IrN6trcuXJ0HjbsR9XrW0NHF8KeGse5ajwyL8eGKUR7eG7lIrIPQZ_gaVNeRSg7FH6VyLHVPswUlNfefJTfSPVLVefKaGoaoY7fswRmp12IQKTHqAJxeDfpnCj2qBFLwt5CQAR_LwV6dD9dxJGiVGkAokOj8Ba4PxS7caPW5jj5K',
+      'title': '기요미즈데라',
+      'location': '교토 · 히가시야마구',
+      'rating': 4.9,
+      'reviewCount': 9100,
+      'hours': '06:00 ~ 18:00',
+      'fee': '성인 400엔',
+      'description': '교토 동쪽 히가시야마 구릉에 자리한 유네스코 세계문화유산으로, 못을 전혀 사용하지 않고 지어진 목조 무대가 특징입니다.',
+      'tags': ['세계문화유산', '사원', '전망', '역사', '벚꽃명소'],
+      'tips': [
+        {'icon': '🌸', 'text': '봄 벚꽃 시즌에 야간 라이트업 이벤트 진행'},
+        {'icon': '🍁', 'text': '11월 단풍철이 최고 인기 시즌 (사전 예약 권장)'},
+        {'icon': '💧', 'text': '경내 세 줄기 폭포수를 마시면 소원 성취한다는 전설'},
+      ],
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    // 1. 가로 스크롤 뷰는 부모 위젯이 명확한 높이값을 지정해줘야 합니다.
-    return SizedBox(
-      height: 150, // 가로 스크롤 영역의 전체 높이
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal, // 2. 가로 스크롤 설정
-        itemCount: _recommendations.length, // 3. 임시 데이터의 개수만큼 생성
-        // 4. 리스트의 좌우에 패딩을 줍니다.
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        itemBuilder: (context, index) {
-          final item = _recommendations[index];
-          // 5. 각 항목을 렌더링
-          return _buildRecommendationCard(
-            context,
-            item['imageUrl']!,
-            item['title']!,
-          );
-        },
-      ),
-    );
-  }
+    final colors = context.colors;
+    final cardWidth = context.isTablet ? 320.0 : 260.0;
 
-  /// 6. 추천 장소 카드 UI를 구성하는 헬퍼 위젯
-  Widget _buildRecommendationCard(
-    BuildContext context,
-    String imageUrl,
-    String title,
-  ) {
-    return Container(
-      width: 220, // 7. 각 카드의 너비 지정
-      margin: const EdgeInsets.only(right: 12), // 8. 카드 사이의 간격
-      child: InkWell(
-        onTap: () {
-          // 9. (구현 필요) 카드 클릭 시 동작
-          log('$title 탭됨');
-        },
-        borderRadius: BorderRadius.circular(12),
-        child: ClipRRect(
-          // 10. 이미지와 텍스트에 둥근 모서리 적용
-          borderRadius: BorderRadius.circular(12),
-          child: Stack(
-            fit: StackFit.expand, // 11. 이미지가 Stack을 꽉 채우도록 설정
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: context.hPad, vertical: 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // 12. 배경 이미지 (네트워크 이미지 사용)
-              Image.network(
-                imageUrl,
-                fit: BoxFit.cover, // 이미지가 카드를 꽉 채우고 비율 유지
-                // 13. 이미지 로딩 중/실패 시 처리
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-                  return const Center(child: CircularProgressIndicator());
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.grey[200],
-                    child: const Icon(Icons.image_not_supported_outlined),
-                  );
-                },
-              ),
-              // 14. 이미지 위에 어두운 그라데이션 오버레이 (텍스트가 잘 보이도록)
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.black.withValues(alpha: 0),
-                      Colors.transparent,
-                      Colors.black.withValues(alpha: 0),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: const [0.0, 0.4, 1.0], // 그라데이션 범위 조절
-                  ),
+              Text(
+                '지금 가장 핫한 장소',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: colors.textPrimary,
                 ),
               ),
-              // 15. 이미지 하단에 텍스트 배치
-              Positioned(
-                bottom: 12,
-                left: 12,
-                right: 12,
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    shadows: [
-                      // 텍스트 그림자 (가독성 향상)
-                      Shadow(
-                        blurRadius: 4,
-                        color: Colors.black54,
-                        offset: Offset(1, 1),
-                      ),
-                    ],
-                  ),
+              Text(
+                '추천 리스트',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: colors.textSecondary,
                 ),
               ),
             ],
           ),
         ),
-      ),
+        SizedBox(
+          height: 160,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.symmetric(horizontal: context.hPad),
+            itemCount: _recommendations.length,
+            itemBuilder: (context, index) {
+              final item = _recommendations[index];
+              final isLast = index == _recommendations.length - 1;
+              return GestureDetector(
+                onTap: () => Navigator.of(context).push(
+                  PageRouteBuilder<void>(
+                    pageBuilder: (ctx, a1, a2) => PlaceDetailScreen(place: item),
+                    transitionsBuilder: (_, animation, a2, child) {
+                      final tween = Tween(
+                        begin: const Offset(0, 1),
+                        end: Offset.zero,
+                      ).chain(CurveTween(curve: Curves.easeOutCubic));
+                      return SlideTransition(
+                        position: animation.drive(tween),
+                        child: child,
+                      );
+                    },
+                    transitionDuration: const Duration(milliseconds: 350),
+                  ),
+                ),
+                child: Container(
+                  width: cardWidth,
+                  margin: EdgeInsets.only(right: isLast ? 0 : 16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.05),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network(
+                          item['image']! as String,
+                          height: double.infinity,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      // 그라디언트 오버레이
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [Colors.transparent, Colors.black],
+                            stops: [0.6, 1.0],
+                          ),
+                        ),
+                        child: const SizedBox.expand(),
+                      ),
+                      Positioned(
+                        bottom: 16,
+                        left: 16,
+                        right: 16,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                item['location']! as String,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              item['title']! as String,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        top: 12,
+                        right: 12,
+                        child: Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.35),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: Colors.white,
+                            size: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

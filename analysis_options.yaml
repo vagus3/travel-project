@@ -9,9 +9,9 @@ analyzer:
     inference_failure_on_function_return_type: ignore
     duplicate_definition: ignore
     lines_longer_than_80_chars: ignore
-    sort_constructors_first: ignore
+    sort_constructors_first: true
   exclude:
-    - "**/*.g.dart" 
+    - "**/*.g.dart"
     - "**/*.freezed.dart"
     - "lib/shared/image_generated/**"
   plugins:

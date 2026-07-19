@@ -62,5 +62,8 @@
     "search.exclude": {
         "**/.fvm": true,
         "**/build": true
-    }
+    },
+    
 }
+    
+    
