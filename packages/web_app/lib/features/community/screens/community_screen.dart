@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:core/core/themes/app_colors.dart';
-import 'package:web_app/features/home/widgets/travel_post_card.dart';
+import 'package:core/core/themes/app_typography.dart';
+import 'package:mobile_app/features/home/widgets/travel_post_card.dart';
 
 /// 커뮤니티 탭 화면 — 여행 포스트 피드를 표시합니다.
 class CommunityScreen extends StatelessWidget {
@@ -17,10 +18,9 @@ class CommunityScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Text(
           '커뮤니티',
-          style: TextStyle(
+          style: AppTypography.subtitle.copyWith(
             color: colors.textPrimary,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
           ),
         ),
         centerTitle: true,

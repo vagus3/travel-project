@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/hanill/controllers/hanill_controller.dart';
 import 'package:core/features/hanill/models/hanill_model.dart';
 import 'package:core/features/schedule/controllers/schedule_controller.dart';
 import 'package:core/features/schedule/models/schedule_model.dart';
-import 'package:web_app/features/schedule/screens/schedule_detail_screen.dart';
+import 'package:mobile_app/features/schedule/screens/schedule_detail_screen.dart';
 
-const _primaryPink = Color(0xFFEE2B5B);
 const _sidebarWidth = 280.0;
 
 /// 한일이 AI 채팅 화면
@@ -134,6 +135,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     final state = ref.watch(hanillControllerProvider);
 
     if (state.isLoading) {
@@ -146,13 +148,13 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
         _buildAnimatedBackground(
           child: Column(
             children: [
-              _buildTopBar(state),
+              _buildTopBar(colors, state),
               Expanded(
                 child: state.currentMessages.isEmpty
-                    ? _buildWelcome()
-                    : _buildChatList(state),
+                    ? _buildWelcome(colors)
+                    : _buildChatList(colors, state),
               ),
-              _buildInputBar(state.isLoading),
+              _buildInputBar(colors, state.isLoading),
             ],
           ),
         ),
@@ -175,13 +177,13 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
           top: 0,
           bottom: 0,
           width: _sidebarWidth,
-          child: _buildSidebar(state),
+          child: _buildSidebar(colors, state),
         ),
       ],
     );
   }
 
-  /// 분홍 톤의 일렁이는 그라데이션 배경
+  /// 분홍 톤의 일렁이는 그라데이션 배경 (한일이 전용 브랜드 배경 — 테마 무관 고정)
   Widget _buildAnimatedBackground({required Widget child}) {
     return AnimatedBuilder(
       animation: _bgController,
@@ -212,11 +214,11 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
     );
   }
 
-  Widget _buildTopBar(HanillState state) {
+  Widget _buildTopBar(AppColors colors, HanillState state) {
     return DecoratedBox(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: Color(0x1AEE2B5B)),
+          bottom: BorderSide(color: colors.highlight.withValues(alpha: 0.1)),
         ),
       ),
       child: SafeArea(
@@ -226,7 +228,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
           child: Row(
             children: [
               IconButton(
-                icon: const Icon(Icons.menu_rounded, color: _primaryPink),
+                icon: Icon(Icons.menu_rounded, color: colors.highlight),
                 onPressed: () => setState(() => _isSidebarOpen = true),
               ),
               Expanded(
@@ -234,15 +236,13 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                   state.activeThread?.title ?? '한일이',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF1A1A2E),
+                  style: AppTypography.bodyBold.copyWith(
+                    color: colors.textPrimary,
                   ),
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.edit_outlined, color: _primaryPink),
+                icon: Icon(Icons.edit_outlined, color: colors.highlight),
                 tooltip: '새 대화',
                 onPressed: () {
                   ref.read(hanillControllerProvider.notifier).createNewThread();
@@ -255,11 +255,11 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
     );
   }
 
-  Widget _buildSidebar(HanillState state) {
+  Widget _buildSidebar(AppColors colors, HanillState state) {
     return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
+      decoration: BoxDecoration(
+        color: colors.surface,
+        boxShadow: const [
           BoxShadow(
             color: Color(0x22000000),
             blurRadius: 12,
@@ -276,20 +276,20 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
               padding: const EdgeInsets.fromLTRB(20, 16, 8, 8),
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       '대화 기록',
-                      style: TextStyle(
+                      style: AppTypography.subtitle.copyWith(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF1A1A2E),
+                        color: colors.textPrimary,
                       ),
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.close_rounded,
-                      color: Color(0xFF888888),
+                      color: colors.textSecondary,
                       size: 20,
                     ),
                     onPressed: () => setState(() => _isSidebarOpen = false),
@@ -311,7 +311,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                 icon: const Icon(Icons.add_rounded, size: 18),
                 label: const Text('새 대화'),
                 style: FilledButton.styleFrom(
-                  backgroundColor: _primaryPink,
+                  backgroundColor: colors.highlight,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -330,7 +330,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 itemCount: state.threads.length,
                 itemBuilder: (context, index) =>
-                    _buildThreadItem(state, state.threads[index]),
+                    _buildThreadItem(colors, state, state.threads[index]),
               ),
             ),
           ],
@@ -339,12 +339,12 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
     );
   }
 
-  Widget _buildThreadItem(HanillState state, ChatThread thread) {
+  Widget _buildThreadItem(AppColors colors, HanillState state, ChatThread thread) {
     final isActive = thread.id == state.activeThreadId;
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: isActive ? _primaryPink.withValues(alpha: 0.08) : null,
+        color: isActive ? colors.highlight.withValues(alpha: 0.08) : null,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
@@ -369,44 +369,42 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                         thread.title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 14,
+                        style: AppTypography.caption.copyWith(
                           fontWeight: isActive
                               ? FontWeight.w600
                               : FontWeight.normal,
                           color: isActive
-                              ? _primaryPink
-                              : const Color(0xFF1A1A2E),
+                              ? colors.highlight
+                              : colors.textPrimary,
                         ),
                       ),
                       const SizedBox(height: 2),
                       Text(
                         _timeAgo(thread.createdAt),
-                        style: const TextStyle(
-                          fontSize: 11,
-                          color: Color(0xFF999999),
+                        style: AppTypography.micro.copyWith(
+                          color: colors.textMuted,
                         ),
                       ),
                     ],
                   ),
                 ),
                 PopupMenuButton<String>(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.more_horiz_rounded,
                     size: 18,
-                    color: Color(0xFF999999),
+                    color: colors.textMuted,
                   ),
                   itemBuilder: (_) => [
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'delete',
                       child: Row(
                         children: [
                           Icon(Icons.delete_outline_rounded,
-                              size: 18, color: Colors.redAccent),
-                          SizedBox(width: 8),
+                              size: 18, color: colors.error),
+                          const SizedBox(width: 8),
                           Text(
                             '삭제',
-                            style: TextStyle(color: Colors.redAccent),
+                            style: TextStyle(color: colors.error),
                           ),
                         ],
                       ),
@@ -428,7 +426,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
     );
   }
 
-  Widget _buildWelcome() {
+  Widget _buildWelcome(AppColors colors) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -444,10 +442,10 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
             return RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                style: const TextStyle(
+                style: AppTypography.title.copyWith(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1A1A2E),
+                  color: colors.textPrimary,
                   height: 1.5,
                 ),
                 children: [
@@ -456,7 +454,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                     text: '|',
                     style: TextStyle(
                       color: cursorVisible
-                          ? _primaryPink
+                          ? colors.highlight
                           : Colors.transparent,
                       fontWeight: FontWeight.w400,
                     ),
@@ -470,21 +468,25 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
     );
   }
 
-  Widget _buildChatList(HanillState state) {
+  Widget _buildChatList(AppColors colors, HanillState state) {
     return ListView.builder(
       controller: _scrollController,
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
       itemCount: state.currentMessages.length + (state.isLoading ? 1 : 0),
       itemBuilder: (context, index) {
         if (index == state.currentMessages.length) {
-          return _buildTypingIndicator();
+          return _buildTypingIndicator(colors);
         }
-        return _buildMessageBubble(context, state.currentMessages[index]);
+        return _buildMessageBubble(context, colors, state.currentMessages[index]);
       },
     );
   }
 
-  Widget _buildMessageBubble(BuildContext context, ChatMessage message) {
+  Widget _buildMessageBubble(
+    BuildContext context,
+    AppColors colors,
+    ChatMessage message,
+  ) {
     final isUser = message.role == MessageRole.user;
 
     return Padding(
@@ -499,14 +501,13 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               if (!isUser) ...[
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 16,
-                  backgroundColor: _primaryPink,
+                  backgroundColor: colors.highlight,
                   child: Text(
                     '한',
-                    style: TextStyle(
+                    style: AppTypography.small.copyWith(
                       color: Colors.white,
-                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -516,7 +517,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
               Flexible(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: isUser ? _primaryPink : Colors.white,
+                    color: isUser ? colors.highlight : colors.surface,
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(18),
                       topRight: const Radius.circular(18),
@@ -538,9 +539,8 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                     ),
                     child: Text(
                       message.content,
-                      style: TextStyle(
-                        color:
-                            isUser ? Colors.white : const Color(0xFF1A1A2E),
+                      style: AppTypography.body.copyWith(
+                        color: isUser ? Colors.white : colors.textPrimary,
                         fontSize: 15,
                         height: 1.5,
                       ),
@@ -553,21 +553,25 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
           ),
           if (message.generatedSchedule != null) ...[
             const SizedBox(height: 8),
-            _buildScheduleCard(context, message.generatedSchedule!),
+            _buildScheduleCard(context, colors, message.generatedSchedule!),
           ],
         ],
       ),
     );
   }
 
-  Widget _buildScheduleCard(BuildContext context, GeneratedSchedule schedule) {
+  Widget _buildScheduleCard(
+    BuildContext context,
+    AppColors colors,
+    GeneratedSchedule schedule,
+  ) {
     return Container(
       margin: const EdgeInsets.only(left: 40),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colors.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _primaryPink.withValues(alpha: 0.3)),
+        border: Border.all(color: colors.highlight.withValues(alpha: 0.3)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x14000000),
@@ -581,15 +585,14 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
         children: [
           Row(
             children: [
-              const Icon(Icons.event_note, color: _primaryPink, size: 18),
+              Icon(Icons.event_note, color: colors.highlight, size: 18),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
                   schedule.title,
-                  style: const TextStyle(
+                  style: AppTypography.caption.copyWith(
                     fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: Color(0xFF1A1A2E),
+                    color: colors.textPrimary,
                   ),
                 ),
               ),
@@ -598,7 +601,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
           const SizedBox(height: 4),
           Text(
             '${schedule.startDate} ~ ${schedule.endDate}  ·  ${schedule.days.length}일',
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
+            style: AppTypography.small.copyWith(color: colors.textMuted),
           ),
           const SizedBox(height: 10),
           SizedBox(
@@ -606,7 +609,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
             child: FilledButton(
               onPressed: () => _addToSchedule(context, schedule),
               style: FilledButton.styleFrom(
-                backgroundColor: _primaryPink,
+                backgroundColor: colors.highlight,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -623,19 +626,18 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
     );
   }
 
-  Widget _buildTypingIndicator() {
+  Widget _buildTypingIndicator(AppColors colors) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             radius: 16,
-            backgroundColor: _primaryPink,
+            backgroundColor: colors.highlight,
             child: Text(
               '한',
-              style: TextStyle(
+              style: AppTypography.small.copyWith(
                 color: Colors.white,
-                fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -643,7 +645,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
           const SizedBox(width: 8),
           DecoratedBox(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: colors.surface,
               borderRadius: BorderRadius.circular(18),
               boxShadow: const [
                 BoxShadow(
@@ -653,16 +655,16 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                 ),
               ],
             ),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _DotIndicator(delay: 0),
-                  SizedBox(width: 4),
-                  _DotIndicator(delay: 200),
-                  SizedBox(width: 4),
-                  _DotIndicator(delay: 400),
+                  _DotIndicator(delay: 0, color: colors.highlight),
+                  const SizedBox(width: 4),
+                  _DotIndicator(delay: 200, color: colors.highlight),
+                  const SizedBox(width: 4),
+                  _DotIndicator(delay: 400, color: colors.highlight),
                 ],
               ),
             ),
@@ -672,19 +674,19 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
     );
   }
 
-  Widget _buildInputBar(bool isLoading) {
+  Widget _buildInputBar(AppColors colors, bool isLoading) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
       child: Column(
         children: [
-          _buildSuggestionChips(),
+          _buildSuggestionChips(colors),
           const SizedBox(height: 8),
           Row(
             children: [
               Expanded(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: colors.surface,
                     borderRadius: BorderRadius.circular(28),
                     boxShadow: const [
                       BoxShadow(
@@ -697,11 +699,11 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                   child: TextField(
                     controller: _inputController,
                     onSubmitted: (_) => _send(),
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: '일본 여행 계획을 세워주세요.',
-                      hintStyle: TextStyle(color: Color(0xFFAAAAAA)),
+                      hintStyle: TextStyle(color: colors.textMuted),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 14,
                       ),
@@ -715,8 +717,8 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     color: isLoading
-                        ? _primaryPink.withValues(alpha: 0.5)
-                        : _primaryPink,
+                        ? colors.highlight.withValues(alpha: 0.5)
+                        : colors.highlight,
                     shape: BoxShape.circle,
                   ),
                   child: const SizedBox(
@@ -737,7 +739,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
     );
   }
 
-  Widget _buildSuggestionChips() {
+  Widget _buildSuggestionChips(AppColors colors) {
     return SizedBox(
       height: 36,
       child: ListView.separated(
@@ -753,10 +755,10 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
             },
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: colors.surface,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: _primaryPink.withValues(alpha: 0.4),
+                  color: colors.highlight.withValues(alpha: 0.4),
                 ),
               ),
               child: Padding(
@@ -764,9 +766,8 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                     const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                 child: Text(
                   s,
-                  style: const TextStyle(
-                    color: _primaryPink,
-                    fontSize: 13,
+                  style: AppTypography.label.copyWith(
+                    color: colors.highlight,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -781,9 +782,10 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
 
 /// 타이핑 애니메이션 점 위젯
 class _DotIndicator extends StatefulWidget {
-  const _DotIndicator({required this.delay});
+  const _DotIndicator({required this.delay, required this.color});
 
   final int delay;
+  final Color color;
 
   @override
   State<_DotIndicator> createState() => _DotIndicatorState();
@@ -823,7 +825,7 @@ class _DotIndicatorState extends State<_DotIndicator>
       animation: _animation,
       builder: (_, child) => DecoratedBox(
         decoration: BoxDecoration(
-          color: _primaryPink.withValues(alpha: 0.3 + _animation.value * 0.7),
+          color: widget.color.withValues(alpha: 0.3 + _animation.value * 0.7),
           shape: BoxShape.circle,
         ),
         child: const SizedBox(width: 8, height: 8),

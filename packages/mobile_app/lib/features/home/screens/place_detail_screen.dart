@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 
 /// 여행지 상세 정보 화면
 class PlaceDetailScreen extends StatelessWidget {
@@ -10,6 +12,7 @@ class PlaceDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     final String title = place['title'] as String? ?? '';
     final String image = place['image'] as String? ?? '';
     final String location = place['location'] as String? ?? '교토';
@@ -39,14 +42,14 @@ class PlaceDetailScreen extends StatelessWidget {
             ];
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      backgroundColor: colors.background,
       body: CustomScrollView(
         slivers: [
           // 상단 이미지 + 앱바
           SliverAppBar(
             expandedHeight: 320,
             pinned: true,
-            backgroundColor: Colors.white,
+            backgroundColor: colors.surface,
             iconTheme: const IconThemeData(color: Colors.white),
             flexibleSpace: FlexibleSpaceBar(
               background: Stack(
@@ -56,12 +59,12 @@ class PlaceDetailScreen extends StatelessWidget {
                     image,
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) => Container(
-                      color: const Color(0xFFCFD8DC),
+                      color: colors.border,
                       child: const Icon(Icons.image_not_supported,
                           size: 60, color: Colors.white),
                     ),
                   ),
-                  // 그라디언트 오버레이
+                  // 그라디언트 오버레이 (사진 위 텍스트 가독성용 — 테마 무관)
                   const DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -88,14 +91,13 @@ class PlaceDetailScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF004AAD).withOpacity(0.85),
+                            color: colors.primary.withValues(alpha: 0.85),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
                             location,
-                            style: const TextStyle(
+                            style: AppTypography.small.copyWith(
                               color: Colors.white,
-                              fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -103,11 +105,11 @@ class PlaceDetailScreen extends StatelessWidget {
                         const SizedBox(height: 8),
                         Text(
                           title,
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: AppTypography.heading.copyWith(
                             fontSize: 26,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            shadows: [
+                            shadows: const [
                               Shadow(
                                   color: Colors.black45,
                                   blurRadius: 8,
@@ -151,26 +153,26 @@ class PlaceDetailScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // 설명
-                  _SectionTitle(title: '장소 소개'),
+                  const _SectionTitle(title: '장소 소개'),
                   const SizedBox(height: 10),
                   Text(
                     description,
-                    style: const TextStyle(
+                    style: AppTypography.body.copyWith(
                       fontSize: 15,
-                      color: Color(0xFF424242),
+                      color: colors.textSecondary,
                       height: 1.7,
                     ),
                   ),
                   const SizedBox(height: 24),
 
                   // 방문 정보
-                  _SectionTitle(title: '방문 정보'),
+                  const _SectionTitle(title: '방문 정보'),
                   const SizedBox(height: 12),
                   _InfoCard(hours: hours, fee: fee),
                   const SizedBox(height: 24),
 
                   // 여행 팁
-                  _SectionTitle(title: '여행 팁'),
+                  const _SectionTitle(title: '여행 팁'),
                   const SizedBox(height: 12),
                   ...tips.map(
                     (tip) => _TipItem(icon: tip['icon']!, text: tip['text']!),
@@ -191,16 +193,15 @@ class PlaceDetailScreen extends StatelessWidget {
                       },
                       icon: const Icon(Icons.add_circle_outline,
                           color: Colors.white),
-                      label: const Text(
+                      label: Text(
                         '내 일정에 추가',
-                        style: TextStyle(
+                        style: AppTypography.body.copyWith(
                           color: Colors.white,
-                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF004AAD),
+                        backgroundColor: colors.primary,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14),
@@ -228,23 +229,24 @@ class _SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return Row(
       children: [
         Container(
           width: 4,
           height: 18,
           decoration: BoxDecoration(
-            color: const Color(0xFF004AAD),
+            color: colors.primary,
             borderRadius: BorderRadius.circular(2),
           ),
         ),
         const SizedBox(width: 8),
         Text(
           title,
-          style: const TextStyle(
+          style: AppTypography.subtitle.copyWith(
             fontSize: 17,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF212121),
+            color: colors.textPrimary,
           ),
         ),
       ],
@@ -259,33 +261,29 @@ class _RatingRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return Row(
       children: [
-        const Icon(Icons.star_rounded, color: Color(0xFFFFC107), size: 22),
+        Icon(Icons.star_rounded, color: colors.warning, size: 22),
         const SizedBox(width: 4),
         Text(
           rating.toStringAsFixed(1),
-          style: const TextStyle(
-            fontSize: 16,
+          style: AppTypography.body.copyWith(
             fontWeight: FontWeight.bold,
-            color: Color(0xFF212121),
+            color: colors.textPrimary,
           ),
         ),
         const SizedBox(width: 6),
         Text(
           '리뷰 ${reviewCount.toString().replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+$)'), (m) => '${m[1]},')}개',
-          style: const TextStyle(
-            fontSize: 13,
-            color: Color(0xFF757575),
-          ),
+          style: AppTypography.label.copyWith(color: colors.textMuted),
         ),
         const Spacer(),
-        const Icon(Icons.location_on_outlined,
-            color: Color(0xFF617C89), size: 16),
+        Icon(Icons.location_on_outlined, color: colors.textSecondary, size: 16),
         const SizedBox(width: 2),
-        const Text(
+        Text(
           '일본 · 교토',
-          style: TextStyle(fontSize: 13, color: Color(0xFF617C89)),
+          style: AppTypography.label.copyWith(color: colors.textSecondary),
         ),
       ],
     );
@@ -298,6 +296,7 @@ class _TagRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -307,14 +306,13 @@ class _TagRow extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xFFE3F0FF),
+                color: colors.primary.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
                 '# $tag',
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF004AAD),
+                style: AppTypography.small.copyWith(
+                  color: colors.primary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -332,14 +330,15 @@ class _InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colors.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -352,7 +351,7 @@ class _InfoCard extends StatelessWidget {
             label: '운영 시간',
             value: hours,
           ),
-          const Divider(height: 20, color: Color(0xFFEEEEEE)),
+          Divider(height: 20, color: colors.border),
           _InfoRow(
             icon: Icons.confirmation_number_outlined,
             label: '입장료',
@@ -373,29 +372,27 @@ class _InfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return Row(
       children: [
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: const Color(0xFFE3F0FF),
+            color: colors.primary.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Icon(icon, size: 18, color: const Color(0xFF004AAD)),
+          child: Icon(icon, size: 18, color: colors.primary),
         ),
         const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(label,
-                style: const TextStyle(
-                    fontSize: 11, color: Color(0xFF9E9E9E))),
+                style: AppTypography.micro.copyWith(color: colors.textMuted)),
             const SizedBox(height: 2),
             Text(value,
-                style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF212121))),
+                style: AppTypography.caption.copyWith(
+                    fontWeight: FontWeight.w600, color: colors.textPrimary)),
           ],
         ),
       ],
@@ -410,6 +407,7 @@ class _TipItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
@@ -420,9 +418,8 @@ class _TipItem extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Color(0xFF424242),
+              style: AppTypography.caption.copyWith(
+                color: colors.textSecondary,
                 height: 1.5,
               ),
             ),

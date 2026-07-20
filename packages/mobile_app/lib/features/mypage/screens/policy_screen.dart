@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 
 /// 약관 / 개인정보 처리방침 등 정적 정책 문서를 표시하는 화면.
 ///
@@ -27,10 +28,9 @@ class PolicyScreen extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: TextStyle(
+          style: AppTypography.subtitle.copyWith(
             color: colors.textPrimary,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
           ),
         ),
         bottom: PreferredSize(
@@ -42,8 +42,7 @@ class PolicyScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
         child: Text(
           body,
-          style: TextStyle(
-            fontSize: 14,
+          style: AppTypography.caption.copyWith(
             height: 1.7,
             color: colors.textSecondary,
           ),

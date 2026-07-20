@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/schedule/models/schedule_model.dart';
 
 /// 일정 상세 화면 — Google Maps Static API로 동선 표시
@@ -73,25 +75,22 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     final details = _currentDayDetails;
     final mapUrl = _buildMapUrl(details);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: colors.surface,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios_new, color: colors.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           widget.schedule.title,
-          style: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+          style: AppTypography.bodyBold.copyWith(color: colors.textPrimary),
         ),
         centerTitle: true,
       ),
@@ -107,9 +106,9 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
                 ? Image.network(
                     mapUrl,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, e, s) => _buildMapPlaceholder(),
+                    errorBuilder: (_, e, s) => _buildMapPlaceholder(colors),
                   )
-                : _buildMapPlaceholder(),
+                : _buildMapPlaceholder(colors),
           ),
 
           // 하단 시트
@@ -117,10 +116,12 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
             maxChildSize: 0.85,
             builder: (context, scrollController) {
               return DecoratedBox(
-                decoration: const BoxDecoration(
-                  color: Color(0xFFF8F6F6),
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                  boxShadow: [
+                decoration: BoxDecoration(
+                  color: colors.background,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(24),
+                  ),
+                  boxShadow: const [
                     BoxShadow(blurRadius: 20, color: Colors.black26),
                   ],
                 ),
@@ -133,7 +134,7 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
                         width: 40,
                         height: 5,
                         decoration: BoxDecoration(
-                          color: Colors.grey[300],
+                          color: colors.border,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -157,13 +158,13 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
                                     style: TextStyle(
                                       color: isSelected
                                           ? Colors.white
-                                          : Colors.black,
+                                          : colors.textPrimary,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   backgroundColor: isSelected
-                                      ? const Color(0xFFEE2B5B)
-                                      : Colors.grey[200],
+                                      ? colors.highlight
+                                      : colors.background,
                                   side: BorderSide.none,
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 12,
@@ -188,7 +189,7 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
                               padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
                               itemCount: details.length,
                               itemBuilder: (context, index) =>
-                                  _buildPlaceCard(details[index], index),
+                                  _buildPlaceCard(colors, details[index], index),
                             ),
                     ),
                   ],
@@ -201,24 +202,23 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
     );
   }
 
-  Widget _buildPlaceCard(ScheduleDetail item, int index) {
+  Widget _buildPlaceCard(AppColors colors, ScheduleDetail item, int index) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFEBEE),
+        color: colors.highlight.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
           CircleAvatar(
             radius: 14,
-            backgroundColor: const Color(0xFFEE2B5B),
+            backgroundColor: colors.highlight,
             child: Text(
               '${index + 1}',
-              style: const TextStyle(
+              style: AppTypography.small.copyWith(
                 color: Colors.white,
-                fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -230,24 +230,23 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
               children: [
                 Text(
                   item.time,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF89616B),
+                  style: AppTypography.small.copyWith(
+                    color: colors.textSecondary,
                   ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   item.placeName,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF181113),
+                  style: AppTypography.bodyBold.copyWith(
+                    color: colors.textPrimary,
                   ),
                 ),
                 if (item.description.isNotEmpty)
                   Text(
                     item.description,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    style: AppTypography.small.copyWith(
+                      color: colors.textMuted,
+                    ),
                   ),
               ],
             ),
@@ -257,19 +256,19 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
     );
   }
 
-  Widget _buildMapPlaceholder() {
+  Widget _buildMapPlaceholder(AppColors colors) {
     return ColoredBox(
-      color: const Color(0xFFE8E8E8),
+      color: colors.background,
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.map_outlined, size: 48, color: Colors.grey[500]),
+            Icon(Icons.map_outlined, size: 48, color: colors.textMuted),
             const SizedBox(height: 8),
             Text(
               '.env에 GOOGLE_MAPS_API_KEY를 추가하면\n지도가 표시됩니다.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[600], fontSize: 13),
+              style: AppTypography.label.copyWith(color: colors.textMuted),
             ),
           ],
         ),

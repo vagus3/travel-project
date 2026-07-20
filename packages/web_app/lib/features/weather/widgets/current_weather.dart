@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/weather/models/weather_model.dart';
 
 /// 현재 날씨 위젯
@@ -19,7 +20,7 @@ class CurrentWeatherWidget extends StatelessWidget {
         // 위치 및 날짜
         Text(
           currentWeather.location,
-          style: TextStyle(
+          style: AppTypography.heading.copyWith(
             fontSize: 30,
             fontWeight: FontWeight.bold,
             color: colors.textPrimary,
@@ -29,8 +30,7 @@ class CurrentWeatherWidget extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           currentWeather.date,
-          style: TextStyle(
-            fontSize: 16,
+          style: AppTypography.body.copyWith(
             fontWeight: FontWeight.w500,
             color: colors.textMuted,
           ),
@@ -41,14 +41,14 @@ class CurrentWeatherWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(currentWeather.icon, size: 80, color: const Color(0xFFFFD700)),
+            Icon(currentWeather.icon, size: 80, color: colors.warning),
             const SizedBox(width: 24),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   '${currentWeather.temperature}°',
-                  style: TextStyle(
+                  style: AppTypography.heading.copyWith(
                     fontSize: 60,
                     fontWeight: FontWeight.bold,
                     color: colors.textPrimary,
@@ -58,8 +58,7 @@ class CurrentWeatherWidget extends StatelessWidget {
                 ),
                 Text(
                   currentWeather.description,
-                  style: TextStyle(
-                    fontSize: 18,
+                  style: AppTypography.subtitle.copyWith(
                     fontWeight: FontWeight.w500,
                     color: colors.textMuted,
                   ),
@@ -82,8 +81,7 @@ class CurrentWeatherWidget extends StatelessWidget {
             children: [
               Text(
                 '최고: ${currentWeather.maxTemp}°',
-                style: TextStyle(
-                  fontSize: 14,
+                style: AppTypography.caption.copyWith(
                   fontWeight: FontWeight.w500,
                   color: colors.textMuted,
                 ),
@@ -96,8 +94,7 @@ class CurrentWeatherWidget extends StatelessWidget {
               ),
               Text(
                 '최저: ${currentWeather.minTemp}°',
-                style: TextStyle(
-                  fontSize: 14,
+                style: AppTypography.caption.copyWith(
                   fontWeight: FontWeight.w500,
                   color: colors.textMuted,
                 ),
@@ -136,8 +133,7 @@ class CurrentWeatherWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(
-                  fontSize: 12,
+                style: AppTypography.small.copyWith(
                   fontWeight: FontWeight.w600,
                   color: colors.textMuted,
                 ),
@@ -145,9 +141,7 @@ class CurrentWeatherWidget extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 value,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                style: AppTypography.title.copyWith(
                   color: colors.textPrimary,
                 ),
               ),

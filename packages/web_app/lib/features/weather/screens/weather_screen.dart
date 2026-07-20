@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/home/controllers/travel_configuration_controller.dart';
 import 'package:core/features/weather/controllers/weather_controller.dart';
 import 'package:web_app/features/weather/widgets/current_weather.dart';
@@ -56,10 +57,9 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
         ),
         title: Text(
           '날씨',
-          style: TextStyle(
+          style: AppTypography.subtitle.copyWith(
             color: colors.textPrimary,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
           ),
         ),
         actions: [

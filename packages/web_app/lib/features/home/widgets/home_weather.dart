@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:core/core/themes/app_colors.dart';
 import 'package:core/core/themes/app_responsive.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/home/controllers/travel_configuration_controller.dart';
 import 'package:core/features/weather/controllers/weather_controller.dart';
 import 'package:web_app/features/weather/screens/weather_screen.dart';
@@ -42,8 +43,7 @@ class HomeWeatherWidget extends StatelessWidget {
                 children: [
                   Text(
                     '실시간 ${config.location} 날씨',
-                    style: TextStyle(
-                      fontSize: 18,
+                    style: AppTypography.subtitle.copyWith(
                       fontWeight: FontWeight.bold,
                       color: colors.textPrimary,
                     ),
@@ -60,8 +60,7 @@ class HomeWeatherWidget extends StatelessWidget {
                         children: [
                           Text(
                             '더보기',
-                            style: TextStyle(
-                              fontSize: 12,
+                            style: AppTypography.small.copyWith(
                               fontWeight: FontWeight.w500,
                               color: colors.textSecondary,
                             ),
@@ -119,8 +118,7 @@ class HomeWeatherWidget extends StatelessWidget {
                                 children: [
                                   Text(
                                     weather.description,
-                                    style: const TextStyle(
-                                      fontSize: 20,
+                                    style: AppTypography.title.copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                       height: 1,
@@ -128,8 +126,7 @@ class HomeWeatherWidget extends StatelessWidget {
                                   ),
                                   Text(
                                     '습도: ${weather.humidity}%',
-                                    style: const TextStyle(
-                                      fontSize: 12,
+                                    style: AppTypography.small.copyWith(
                                       color: Colors.white70,
                                     ),
                                   ),
@@ -142,7 +139,7 @@ class HomeWeatherWidget extends StatelessWidget {
                             children: [
                               Text(
                                 '${weather.temperature}°',
-                                style: const TextStyle(
+                                style: AppTypography.heading.copyWith(
                                   fontSize: 36,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
@@ -150,8 +147,7 @@ class HomeWeatherWidget extends StatelessWidget {
                               ),
                               Text(
                                 '최고 ${weather.maxTemp}° / 최저 ${weather.minTemp}°',
-                                style: const TextStyle(
-                                  fontSize: 12,
+                                style: AppTypography.small.copyWith(
                                   color: Colors.white70,
                                 ),
                               ),

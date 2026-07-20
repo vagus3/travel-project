@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/home/controllers/travel_post_controller.dart';
 import 'package:core/features/home/models/post_model.dart';
 
@@ -50,6 +52,7 @@ class _TravelPostCardState extends State<TravelPostCard> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     final post = widget.post;
 
     return Container(
@@ -75,9 +78,8 @@ class _TravelPostCardState extends State<TravelPostCard> {
                 const SizedBox(height: 12),
                 Text(
                   post.title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                  style: AppTypography.bodyBold.copyWith(
+                    color: colors.textPrimary,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -98,23 +100,23 @@ class _TravelPostCardState extends State<TravelPostCard> {
                 children: [
                   Text(
                     post.author,
-                    style: const TextStyle(
+                    style: AppTypography.small.copyWith(
                       fontWeight: FontWeight.bold,
-                      fontSize: 12,
+                      color: colors.textPrimary,
                     ),
                   ),
                   Text(
                     post.timeAgo,
-                    style: const TextStyle(
-                      color: Colors.grey,
+                    style: AppTypography.micro.copyWith(
                       fontSize: 10,
+                      color: colors.textMuted,
                     ),
                   ),
                 ],
               ),
               const Spacer(),
               IconButton(
-                icon: const Icon(Icons.more_vert),
+                icon: Icon(Icons.more_vert, color: colors.textSecondary),
                 onPressed: () {},
               ),
             ],
@@ -136,19 +138,16 @@ class _TravelPostCardState extends State<TravelPostCard> {
                         child: Icon(
                           _isLiked ? Icons.favorite : Icons.favorite_border,
                           key: ValueKey<bool>(_isLiked),
-                          color: _isLiked
-                              ? Colors.red
-                              : const Color(0xFF212121),
+                          color: _isLiked ? colors.error : colors.textPrimary,
                           size: 22,
                         ),
                       ),
                       const SizedBox(width: 6),
                       Text(
                         '$_likeCount',
-                        style: const TextStyle(
-                          fontSize: 13,
+                        style: AppTypography.label.copyWith(
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF212121),
+                          color: colors.textPrimary,
                         ),
                       ),
                     ],
@@ -156,9 +155,9 @@ class _TravelPostCardState extends State<TravelPostCard> {
                 ),
               ),
               const SizedBox(width: 12),
-              const Icon(Icons.chat_bubble_outline, size: 22),
+              Icon(Icons.chat_bubble_outline, size: 22, color: colors.textPrimary),
               const SizedBox(width: 12),
-              const Icon(Icons.send, size: 22),
+              Icon(Icons.send, size: 22, color: colors.textPrimary),
             ],
           ),
         ],
@@ -250,9 +249,10 @@ class _CommunityPostDetailScreenState
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     final post = widget.post;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: colors.surface,
       body: Column(
         children: [
           Expanded(
@@ -262,7 +262,7 @@ class _CommunityPostDetailScreenState
                 SliverAppBar(
                   expandedHeight: 300,
                   pinned: true,
-                  backgroundColor: Colors.white,
+                  backgroundColor: colors.surface,
                   iconTheme: const IconThemeData(color: Colors.white),
                   actions: [
                     IconButton(
@@ -283,7 +283,7 @@ class _CommunityPostDetailScreenState
                           post.imageUrl,
                           fit: BoxFit.cover,
                           errorBuilder: (_, __, ___) => Container(
-                            color: const Color(0xFFCFD8DC),
+                            color: colors.border,
                             child: const Icon(Icons.image_not_supported,
                                 size: 60, color: Colors.white),
                           ),
@@ -325,18 +325,17 @@ class _CommunityPostDetailScreenState
                             children: [
                               Text(
                                 post.author,
-                                style: const TextStyle(
+                                style: AppTypography.label.copyWith(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF212121),
+                                  color: colors.textPrimary,
                                 ),
                               ),
                               const SizedBox(height: 2),
                               Text(
                                 post.timeAgo,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
+                                style: AppTypography.small.copyWith(
+                                  color: colors.textMuted,
                                 ),
                               ),
                             ],
@@ -362,18 +361,17 @@ class _CommunityPostDetailScreenState
                                         : Icons.favorite_border,
                                     key: ValueKey<bool>(_isLiked),
                                     color: _isLiked
-                                        ? Colors.red
-                                        : const Color(0xFF212121),
+                                        ? colors.error
+                                        : colors.textPrimary,
                                     size: 22,
                                   ),
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
                                   '$_likeCount',
-                                  style: const TextStyle(
-                                    fontSize: 13,
+                                  style: AppTypography.label.copyWith(
                                     fontWeight: FontWeight.w600,
-                                    color: Color(0xFF212121),
+                                    color: colors.textPrimary,
                                   ),
                                 ),
                               ],
@@ -394,10 +392,10 @@ class _CommunityPostDetailScreenState
                       children: [
                         Text(
                           post.title,
-                          style: const TextStyle(
+                          style: AppTypography.title.copyWith(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF212121),
+                            color: colors.textPrimary,
                             height: 1.3,
                           ),
                         ),
@@ -405,14 +403,14 @@ class _CommunityPostDetailScreenState
                         Text(
                           post.content ??
                               '아직 준비 중인 상세 내용입니다.\n추후 서버 또는 로컬 DB와 연동하여 본문을 표시할 예정입니다.',
-                          style: const TextStyle(
+                          style: AppTypography.body.copyWith(
                             fontSize: 15,
                             height: 1.7,
-                            color: Color(0xFF374151),
+                            color: colors.textSecondary,
                           ),
                         ),
                         const SizedBox(height: 28),
-                        const Divider(color: Color(0xFFF0F0F0)),
+                        Divider(color: colors.border),
                         const SizedBox(height: 8),
                       ],
                     ),
@@ -425,21 +423,18 @@ class _CommunityPostDetailScreenState
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
                     child: Row(
                       children: [
-                        const Text(
+                        Text(
                           '댓글',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF212121),
+                          style: AppTypography.bodyBold.copyWith(
+                            color: colors.textPrimary,
                           ),
                         ),
                         const SizedBox(width: 6),
                         Text(
                           '${_comments.length}',
-                          style: const TextStyle(
-                            fontSize: 14,
+                          style: AppTypography.caption.copyWith(
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF617C89),
+                            color: colors.textSecondary,
                           ),
                         ),
                       ],
@@ -464,7 +459,7 @@ class _CommunityPostDetailScreenState
           ),
 
           // ── 댓글 입력 바 (하단 고정) ──
-          const Divider(height: 1, color: Color(0xFFF0F0F0)),
+          Divider(height: 1, color: colors.border),
           SafeArea(
             top: false,
             child: Padding(
@@ -474,19 +469,18 @@ class _CommunityPostDetailScreenState
                   Expanded(
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF3F4F6),
+                        color: colors.background,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: TextField(
                         controller: _inputController,
                         textInputAction: TextInputAction.send,
                         onSubmitted: (_) => _send(),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: '댓글을 입력하세요',
-                          hintStyle:
-                              TextStyle(color: Color(0xFFAAAAAA)),
+                          hintStyle: TextStyle(color: colors.textMuted),
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                             horizontal: 18,
                             vertical: 12,
                           ),
@@ -497,12 +491,12 @@ class _CommunityPostDetailScreenState
                   const SizedBox(width: 8),
                   GestureDetector(
                     onTap: _send,
-                    child: const DecoratedBox(
+                    child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: Color(0xFF004AAD),
+                        color: colors.primary,
                         shape: BoxShape.circle,
                       ),
-                      child: SizedBox(
+                      child: const SizedBox(
                         width: 44,
                         height: 44,
                         child: Icon(
@@ -532,6 +526,7 @@ class _CommentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
@@ -539,13 +534,12 @@ class _CommentTile extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 16,
-            backgroundColor: Colors.grey[200],
+            backgroundColor: colors.border,
             child: Text(
               comment.author.characters.first,
-              style: const TextStyle(
-                fontSize: 12,
+              style: AppTypography.small.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF374151),
+                color: colors.textSecondary,
               ),
             ),
           ),
@@ -558,18 +552,16 @@ class _CommentTile extends StatelessWidget {
                   children: [
                     Text(
                       comment.author,
-                      style: const TextStyle(
-                        fontSize: 13,
+                      style: AppTypography.label.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF212121),
+                        color: colors.textPrimary,
                       ),
                     ),
                     const SizedBox(width: 6),
                     Text(
                       comment.timeAgo,
-                      style: const TextStyle(
-                        fontSize: 11,
-                        color: Color(0xFF9CA3AF),
+                      style: AppTypography.micro.copyWith(
+                        color: colors.textMuted,
                       ),
                     ),
                   ],
@@ -577,10 +569,9 @@ class _CommentTile extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   comment.text,
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: AppTypography.caption.copyWith(
                     height: 1.4,
-                    color: Color(0xFF374151),
+                    color: colors.textSecondary,
                   ),
                 ),
               ],
@@ -651,6 +642,7 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     final post = widget.post;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -658,6 +650,7 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
       insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       clipBehavior: Clip.antiAlias,
+      backgroundColor: colors.surface,
       child: SizedBox(
         height: screenHeight * 0.88,
         child: Column(
@@ -671,13 +664,13 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                     post.imageUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) => Container(
-                      color: const Color(0xFFCFD8DC),
+                      color: colors.border,
                       child: const Icon(Icons.image_not_supported,
                           size: 48, color: Colors.white),
                     ),
                   ),
                 ),
-                // 그라디언트 오버레이
+                // 그라디언트 오버레이 (사진 위 텍스트 가독성용 — 테마 무관)
                 Positioned.fill(
                   child: DecoratedBox(
                     decoration: BoxDecoration(
@@ -685,7 +678,7 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.black.withOpacity(0.4),
+                          Colors.black.withValues(alpha: 0.4),
                           Colors.transparent,
                         ],
                         stops: const [0.0, 0.5],
@@ -702,7 +695,7 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                     child: Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.45),
+                        color: Colors.black.withValues(alpha: 0.45),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(Icons.close,
@@ -735,18 +728,16 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                             children: [
                               Text(
                                 post.author,
-                                style: const TextStyle(
-                                  fontSize: 14,
+                                style: AppTypography.caption.copyWith(
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF212121),
+                                  color: colors.textPrimary,
                                 ),
                               ),
                               const SizedBox(height: 2),
                               Text(
                                 post.timeAgo,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
+                                style: AppTypography.small.copyWith(
+                                  color: colors.textMuted,
                                 ),
                               ),
                             ],
@@ -772,18 +763,17 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                                         : Icons.favorite_border,
                                     key: ValueKey<bool>(_isLiked),
                                     color: _isLiked
-                                        ? Colors.red
-                                        : const Color(0xFF212121),
+                                        ? colors.error
+                                        : colors.textPrimary,
                                     size: 22,
                                   ),
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
                                   '$_likeCount',
-                                  style: const TextStyle(
-                                    fontSize: 13,
+                                  style: AppTypography.label.copyWith(
                                     fontWeight: FontWeight.w600,
-                                    color: Color(0xFF212121),
+                                    color: colors.textPrimary,
                                   ),
                                 ),
                               ],
@@ -802,10 +792,9 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                       children: [
                         Text(
                           post.title,
-                          style: const TextStyle(
-                            fontSize: 18,
+                          style: AppTypography.subtitle.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF212121),
+                            color: colors.textPrimary,
                             height: 1.35,
                           ),
                         ),
@@ -813,14 +802,13 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                         Text(
                           post.content ??
                               '아직 준비 중인 상세 내용입니다.\n추후 서버 또는 로컬 DB와 연동하여 본문을 표시할 예정입니다.',
-                          style: const TextStyle(
-                            fontSize: 14,
+                          style: AppTypography.caption.copyWith(
                             height: 1.7,
-                            color: Color(0xFF374151),
+                            color: colors.textSecondary,
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const Divider(color: Color(0xFFF0F0F0)),
+                        Divider(color: colors.border),
                         const SizedBox(height: 8),
                       ],
                     ),
@@ -831,21 +819,20 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
                     child: Row(
                       children: [
-                        const Text(
+                        Text(
                           '댓글',
-                          style: TextStyle(
+                          style: AppTypography.label.copyWith(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF212121),
+                            color: colors.textPrimary,
                           ),
                         ),
                         const SizedBox(width: 6),
                         Text(
                           '${_comments.length}',
-                          style: const TextStyle(
-                            fontSize: 13,
+                          style: AppTypography.label.copyWith(
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF617C89),
+                            color: colors.textSecondary,
                           ),
                         ),
                       ],
@@ -865,7 +852,7 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
             ),
 
             // ── 댓글 입력바 (모달 하단 고정) ──
-            const Divider(height: 1, color: Color(0xFFF0F0F0)),
+            Divider(height: 1, color: colors.border),
             Padding(
               padding: EdgeInsets.fromLTRB(
                 12,
@@ -878,18 +865,18 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                   Expanded(
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF3F4F6),
+                        color: colors.background,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: TextField(
                         controller: _inputController,
                         textInputAction: TextInputAction.send,
                         onSubmitted: (_) => _send(),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: '댓글을 입력하세요',
-                          hintStyle: TextStyle(color: Color(0xFFAAAAAA)),
+                          hintStyle: TextStyle(color: colors.textMuted),
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                             horizontal: 18,
                             vertical: 12,
                           ),
@@ -900,12 +887,12 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                   const SizedBox(width: 8),
                   GestureDetector(
                     onTap: _send,
-                    child: const DecoratedBox(
+                    child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: Color(0xFF004AAD),
+                        color: colors.primary,
                         shape: BoxShape.circle,
                       ),
-                      child: SizedBox(
+                      child: const SizedBox(
                         width: 44,
                         height: 44,
                         child: Icon(
@@ -938,20 +925,20 @@ class TravelPostFeed extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colors = context.colors;
     final postsAsync = ref.watch(travelPostsProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (showHeader)
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Text(
               '여행자 이야기',
-              style: TextStyle(
-                fontSize: 18,
+              style: AppTypography.subtitle.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF212121),
+                color: colors.textPrimary,
               ),
             ),
           ),
@@ -978,8 +965,7 @@ class TravelPostFeed extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Text(
               '포스트를 불러오지 못했습니다.\n$err',
-              style:
-                  const TextStyle(color: Color(0xFF617C89), fontSize: 13),
+              style: AppTypography.label.copyWith(color: colors.textSecondary),
             ),
           ),
         ),

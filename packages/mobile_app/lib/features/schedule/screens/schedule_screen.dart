@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/schedule/controllers/schedule_controller.dart';
 import 'package:mobile_app/features/schedule/screens/schedule_detail_screen.dart';
 import 'package:mobile_app/features/schedule/widgets/schedule_card.dart';
@@ -21,10 +22,9 @@ class ScheduleScreen extends ConsumerWidget {
         automaticallyImplyLeading: false,
         title: Text(
           '일정',
-          style: TextStyle(
+          style: AppTypography.subtitle.copyWith(
             color: colors.textPrimary,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
           ),
         ),
         centerTitle: true,

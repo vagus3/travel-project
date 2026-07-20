@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 
 class _LanguageOption {
   const _LanguageOption({required this.label, required this.locale});
@@ -32,6 +34,7 @@ class LanguagePickerDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     final currentLocale = context.locale;
 
     return Dialog(
@@ -42,18 +45,16 @@ class LanguagePickerDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 12),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 12),
               child: Text(
                 '언어 선택',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF111827),
+                style: AppTypography.bodyBold.copyWith(
+                  color: colors.textPrimary,
                 ),
               ),
             ),
-            const Divider(height: 1, color: Color(0xFFF3F4F6)),
+            Divider(height: 1, color: colors.border),
             for (final option in _options)
               _LanguageTile(
                 option: option,
@@ -85,6 +86,8 @@ class _LanguageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return InkWell(
       onTap: onTap,
       child: Padding(
@@ -94,17 +97,14 @@ class _LanguageTile extends StatelessWidget {
             Expanded(
               child: Text(
                 option.label,
-                style: TextStyle(
-                  fontSize: 15,
+                style: AppTypography.label.copyWith(
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                  color: isSelected
-                      ? const Color(0xFF111827)
-                      : const Color(0xFF374151),
+                  color: isSelected ? colors.textPrimary : colors.textSecondary,
                 ),
               ),
             ),
             if (isSelected)
-              const Icon(Icons.check, size: 20, color: Color(0xFF111827)),
+              Icon(Icons.check, size: 20, color: colors.textPrimary),
           ],
         ),
       ),

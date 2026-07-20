@@ -1,14 +1,9 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
+import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/weather/models/weather_model.dart';
-
-const _kPrimaryColor = Color(0xFF4A90E2);
-const _kCardLightColor = Color(0xFFF7F8FA);
-const _kTextPrimaryColor = Color(0xFF333333);
-const _kTextSecondaryColor = Color(0xFF999999);
-const _kAccentYellow = Color(0xFFFFD700);
-const _kAccentGray = Color(0xFF778899);
 
 /// (View) '14일간 예보' 가로 스크롤 리스트 위젯
 class DailyForecastWidget extends StatelessWidget {
@@ -21,24 +16,22 @@ class DailyForecastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 4, bottom: 16),
+        Padding(
+          padding: const EdgeInsets.only(left: 4, bottom: 16),
           child: Text(
             '14일간 예보',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: _kTextPrimaryColor,
-            ),
+            style: AppTypography.title.copyWith(color: colors.textPrimary),
           ),
         ),
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: _kCardLightColor,
+            color: colors.background,
             borderRadius: BorderRadius.circular(24),
           ),
           child: Column(
@@ -53,10 +46,9 @@ class DailyForecastWidget extends StatelessWidget {
                         child: Text(
                           day,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 12,
+                          style: AppTypography.small.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: _kTextSecondaryColor,
+                            color: colors.textSecondary,
                           ),
                         ),
                       ),
@@ -64,7 +56,7 @@ class DailyForecastWidget extends StatelessWidget {
                     .toList(),
               ),
               const SizedBox(height: 12),
-              const Divider(height: 1, color: Colors.black12),
+              Divider(height: 1, color: colors.border),
               const SizedBox(height: 12),
               // 날짜 그리드 (Wrap으로 구현)
               Wrap(
@@ -79,12 +71,11 @@ class DailyForecastWidget extends StatelessWidget {
                       children: [
                         Text(
                           item.dayOfMonth,
-                          style: TextStyle(
-                            fontSize: 12,
+                          style: AppTypography.small.copyWith(
                             fontWeight: FontWeight.bold,
                             color: item.isSelected
-                                ? _kPrimaryColor
-                                : _kTextPrimaryColor,
+                                ? colors.primary
+                                : colors.textPrimary,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -92,16 +83,16 @@ class DailyForecastWidget extends StatelessWidget {
                           item.icon,
                           size: 20,
                           color: item.icon == Icons.wb_sunny_rounded
-                              ? _kAccentYellow
-                              : _kAccentGray,
+                              ? colors.warning
+                              : colors.textSecondary,
                         ),
                         const SizedBox(height: 8),
                         Text(
                           '${item.maxTemp}°/${item.minTemp}°',
-                          style: const TextStyle(
+                          style: AppTypography.small.copyWith(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                            color: _kTextPrimaryColor,
+                            color: colors.textPrimary,
                             letterSpacing: -0.5,
                           ),
                         ),
@@ -111,7 +102,7 @@ class DailyForecastWidget extends StatelessWidget {
                           height: 4,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.grey[300],
+                            color: colors.border,
                             borderRadius: BorderRadius.circular(2),
                           ),
                           child: FractionallySizedBox(
@@ -120,8 +111,8 @@ class DailyForecastWidget extends StatelessWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 color: item.icon == Icons.wb_sunny_rounded
-                                    ? _kAccentYellow
-                                    : _kAccentGray,
+                                    ? colors.warning
+                                    : colors.textSecondary,
                                 borderRadius: BorderRadius.circular(2),
                               ),
                             ),

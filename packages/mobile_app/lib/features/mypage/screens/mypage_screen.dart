@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/mypage/controllers/mypage_controller.dart';
 import 'package:mobile_app/features/mypage/screens/edit_profile_screen.dart';
 import 'package:mobile_app/features/mypage/screens/language_screen.dart';
@@ -25,10 +26,9 @@ class MyPageScreen extends ConsumerWidget {
         automaticallyImplyLeading: false,
         title: Text(
           '마이페이지',
-          style: TextStyle(
+          style: AppTypography.subtitle.copyWith(
             color: colors.textPrimary,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
           ),
         ),
         bottom: PreferredSize(
@@ -52,8 +52,7 @@ class MyPageScreen extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               child: Text(
                 '나의 활동',
-                style: TextStyle(
-                  fontSize: 16,
+                style: AppTypography.body.copyWith(
                   fontWeight: FontWeight.bold,
                   color: colors.textPrimary,
                 ),
@@ -200,8 +199,7 @@ class MyPageScreen extends ConsumerWidget {
                   children: [
                     Text(
                       '김여행',
-                      style: TextStyle(
-                        fontSize: 18,
+                      style: AppTypography.subtitle.copyWith(
                         fontWeight: FontWeight.bold,
                         color: colors.textPrimary,
                       ),
@@ -209,7 +207,9 @@ class MyPageScreen extends ConsumerWidget {
                     const SizedBox(height: 2),
                     Text(
                       'traveler_kim@email.com',
-                      style: TextStyle(fontSize: 14, color: colors.textMuted),
+                      style: AppTypography.caption.copyWith(
+                        color: colors.textMuted,
+                      ),
                     ),
                   ],
                 ),
@@ -231,8 +231,7 @@ class MyPageScreen extends ConsumerWidget {
                   ),
                   child: Text(
                     '프로필 수정',
-                    style: TextStyle(
-                      fontSize: 12,
+                    style: AppTypography.small.copyWith(
                       fontWeight: FontWeight.bold,
                       color: colors.textPrimary,
                     ),
@@ -282,7 +281,7 @@ class MyPageScreen extends ConsumerWidget {
                   leading: Icon(item.icon, color: colors.textMuted, size: 22),
                   title: Text(
                     item.title,
-                    style: TextStyle(
+                    style: AppTypography.label.copyWith(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
                       color: colors.textPrimary,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:core/core/themes/app_colors.dart';
 import 'package:core/core/themes/app_responsive.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/home/controllers/news_controller.dart';
 import 'package:core/features/home/models/news_model.dart';
 
@@ -22,8 +23,7 @@ class RecentNewsWidget extends ConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: context.hPad, vertical: 12),
           child: Text(
             '최근 뉴스',
-            style: TextStyle(
-              fontSize: 18,
+            style: AppTypography.subtitle.copyWith(
               fontWeight: FontWeight.bold,
               color: colors.textPrimary,
             ),
@@ -57,10 +57,9 @@ class RecentNewsWidget extends ConsumerWidget {
                         contentPadding: const EdgeInsets.all(16),
                         title: Text(
                           article.title,
-                          style: TextStyle(
+                          style: AppTypography.caption.copyWith(
                             fontWeight: FontWeight.w600,
                             color: colors.textPrimary,
-                            fontSize: 14,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -69,8 +68,7 @@ class RecentNewsWidget extends ConsumerWidget {
                           padding: const EdgeInsets.only(top: 4),
                           child: Text(
                             '${article.source} · ${article.timeAgo}',
-                            style: TextStyle(
-                              fontSize: 11,
+                            style: AppTypography.micro.copyWith(
                               color: colors.textSecondary,
                             ),
                           ),
@@ -100,7 +98,7 @@ class RecentNewsWidget extends ConsumerWidget {
             alignment: Alignment.center,
             child: Text(
               'API 키를 .env 파일에 설정해주세요.',
-              style: TextStyle(color: colors.textSecondary, fontSize: 13),
+              style: AppTypography.label.copyWith(color: colors.textSecondary),
             ),
           ),
         ),

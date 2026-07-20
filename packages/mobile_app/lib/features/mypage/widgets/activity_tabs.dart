@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 
 /// 활동 탭 (작성한 리뷰 / 저장한 장소)
 class ActivityTabs extends StatelessWidget {
@@ -63,10 +64,9 @@ class ActivityTabs extends StatelessWidget {
           child: Center(
             child: Text(
               title,
-              style: TextStyle(
+              style: AppTypography.caption.copyWith(
                 color: isSelected ? colors.primary : colors.textMuted,
                 fontWeight: FontWeight.w600,
-                fontSize: 14,
               ),
             ),
           ),

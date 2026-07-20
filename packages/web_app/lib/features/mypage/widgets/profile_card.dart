@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colors.surface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),
@@ -28,13 +32,13 @@ class ProfileCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          const Text(
+          Text(
             '김여행',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+            style: AppTypography.title.copyWith(color: colors.textPrimary),
           ),
-          const Text(
+          Text(
             'traveler_kim@email.com',
-            style: TextStyle(color: Colors.grey),
+            style: AppTypography.body.copyWith(color: colors.textMuted),
           ),
           const SizedBox(height: 16),
           SizedBox(
@@ -42,17 +46,17 @@ class ProfileCard extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFF1F3F5),
-                foregroundColor: Colors.black87,
+                backgroundColor: colors.background,
+                foregroundColor: colors.textPrimary,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 12),
               ),
-              child: const Text(
+              child: Text(
                 '프로필 수정',
-                style: TextStyle(fontWeight: FontWeight.w600),
+                style: AppTypography.body.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:core/core/themes/app_colors.dart';
 import 'package:core/core/themes/app_responsive.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:web_app/features/home/screens/place_detail_screen.dart';
 
 /// '현지 추천 장소' 가로 스크롤 위젯
@@ -92,16 +93,14 @@ class LocalRecommendations extends StatelessWidget {
             children: [
               Text(
                 '지금 가장 핫한 장소',
-                style: TextStyle(
-                  fontSize: 18,
+                style: AppTypography.subtitle.copyWith(
                   fontWeight: FontWeight.bold,
                   color: colors.textPrimary,
                 ),
               ),
               Text(
                 '추천 리스트',
-                style: TextStyle(
-                  fontSize: 12,
+                style: AppTypography.small.copyWith(
                   fontWeight: FontWeight.w500,
                   color: colors.textSecondary,
                 ),
@@ -190,9 +189,8 @@ class LocalRecommendations extends StatelessWidget {
                               ),
                               child: Text(
                                 item['location']! as String,
-                                style: const TextStyle(
+                                style: AppTypography.micro.copyWith(
                                   color: Colors.white,
-                                  fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -200,9 +198,8 @@ class LocalRecommendations extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               item['title']! as String,
-                              style: const TextStyle(
+                              style: AppTypography.subtitle.copyWith(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
                                 color: Colors.white,
                               ),
                               maxLines: 1,

@@ -33,7 +33,7 @@ class SampleScreen extends ConsumerWidget {
                       const SizedBox(width: 4),
                       Text(
                         '${githubRepositoryAsync.value!.stargazersCount}',
-                        style: const TextStyle(fontSize: 14),
+                        style: AppTypography.caption,
                       ),
                     ],
                   ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:core/core/themes/app_colors.dart';
 import 'package:core/core/themes/app_responsive.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:core/features/home/controllers/travel_configuration_controller.dart';
 
 /// 여행 지역 및 일정 선택 위젯
@@ -97,8 +98,7 @@ class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
                       children: [
                         Text(
                           '여행 일정',
-                          style: TextStyle(
-                            fontSize: 10,
+                          style: AppTypography.micro.copyWith(
                             color: colors.textSecondary,
                             fontWeight: FontWeight.w500,
                           ),
@@ -108,8 +108,7 @@ class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
                               ? '날짜를 선택하세요'
                               : '${DateFormat('yyyy.MM.dd').format(_selectedDateRange!.start)} ~ '
                                   '${DateFormat('yyyy.MM.dd').format(_selectedDateRange!.end)}',
-                          style: TextStyle(
-                            fontSize: 14,
+                          style: AppTypography.caption.copyWith(
                             fontWeight: FontWeight.bold,
                             color: colors.textPrimary,
                           ),
@@ -172,8 +171,7 @@ class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
                     children: [
                       Text(
                         '여행지',
-                        style: TextStyle(
-                          fontSize: 10,
+                        style: AppTypography.micro.copyWith(
                           color: colors.textSecondary,
                           fontWeight: FontWeight.w500,
                         ),
@@ -182,8 +180,7 @@ class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
                         controller: _locationController,
                         decoration: InputDecoration(
                           hintText: '도시명을 입력하세요 (예: 오사카)',
-                          hintStyle: TextStyle(
-                            fontSize: 14,
+                          hintStyle: AppTypography.caption.copyWith(
                             color: colors.textMuted,
                             fontWeight: FontWeight.bold,
                           ),
@@ -191,8 +188,7 @@ class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
                         ),
-                        style: TextStyle(
-                          fontSize: 14,
+                        style: AppTypography.caption.copyWith(
                           fontWeight: FontWeight.bold,
                           color: colors.textPrimary,
                         ),
@@ -221,9 +217,9 @@ class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
                 elevation: 4,
                 shadowColor: colors.primary.withValues(alpha: 0.4),
               ),
-              child: const Text(
+              child: Text(
                 '검색하기',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: AppTypography.body.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
           ),

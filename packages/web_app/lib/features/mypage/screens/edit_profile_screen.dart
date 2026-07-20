@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 
 /// 프로필 수정 화면
 class EditProfileScreen extends StatefulWidget {
@@ -51,10 +52,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
         title: Text(
           '프로필 수정',
-          style: TextStyle(
+          style: AppTypography.subtitle.copyWith(
             color: colors.textPrimary,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
           ),
         ),
         bottom: PreferredSize(
@@ -114,8 +114,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Center(
                 child: Text(
                   '사진 변경',
-                  style: TextStyle(
-                    fontSize: 13,
+                  style: AppTypography.label.copyWith(
                     color: colors.primary,
                     fontWeight: FontWeight.w500,
                   ),
@@ -230,9 +229,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     elevation: 0,
                   ),
-                  child: const Text(
+                  child: Text(
                     '저장하기',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: AppTypography.body.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -281,9 +282,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         validator: validator,
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(fontSize: 13, color: colors.textSecondary),
+          labelStyle: AppTypography.label.copyWith(color: colors.textSecondary),
           hintText: hintText,
-          hintStyle: TextStyle(fontSize: 14, color: colors.textMuted),
+          hintStyle: AppTypography.caption.copyWith(color: colors.textMuted),
           border: InputBorder.none,
           suffixIcon: suffixIcon,
         ),

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 
 class _LanguageOption {
   const _LanguageOption({
@@ -39,10 +40,9 @@ class LanguageScreen extends StatelessWidget {
         ),
         title: Text(
           '언어 설정',
-          style: TextStyle(
+          style: AppTypography.subtitle.copyWith(
             color: colors.textPrimary,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
           ),
         ),
         bottom: PreferredSize(
@@ -96,7 +96,7 @@ class LanguageScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   option.label,
-                                  style: TextStyle(
+                                  style: AppTypography.label.copyWith(
                                     fontSize: 15,
                                     fontWeight: isSelected
                                         ? FontWeight.w700
@@ -109,8 +109,7 @@ class LanguageScreen extends StatelessWidget {
                                 const SizedBox(height: 2),
                                 Text(
                                   option.subtitle,
-                                  style: TextStyle(
-                                    fontSize: 12,
+                                  style: AppTypography.small.copyWith(
                                     color: colors.textMuted,
                                   ),
                                 ),
@@ -125,10 +124,10 @@ class LanguageScreen extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 color: colors.textPrimary,
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.check,
                                 size: 14,
-                                color: Colors.white,
+                                color: colors.surface,
                               ),
                             )
                           else

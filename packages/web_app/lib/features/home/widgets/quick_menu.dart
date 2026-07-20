@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:core/core/themes/app_colors.dart';
 import 'package:core/core/themes/app_responsive.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// 홈 화면 퀵 메뉴 — 각 아이콘은 Agoda 관련 페이지로 연결됩니다.
@@ -66,8 +67,7 @@ class QuickMenuWidget extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             menu.label,
-            style: TextStyle(
-              fontSize: 12,
+            style: AppTypography.small.copyWith(
               fontWeight: FontWeight.w600,
               color: colors.textPrimary,
             ),

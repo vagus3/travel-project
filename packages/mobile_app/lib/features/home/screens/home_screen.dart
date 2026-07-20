@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:core/core/themes/app_colors.dart';
 import 'package:core/core/themes/app_responsive.dart';
+import 'package:core/core/themes/app_typography.dart';
 import 'package:mobile_app/features/home/widgets/home_weather.dart';
 import 'package:mobile_app/features/home/widgets/local_recommendations.dart';
 import 'package:mobile_app/features/home/widgets/quick_menu.dart';
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           '로컬 여행 정보',
-          style: TextStyle(
+          style: AppTypography.title.copyWith(
             fontSize: context.titleFontSize,
             fontWeight: FontWeight.bold,
             color: colors.textPrimary,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 
 class _CommunityPost {
   const _CommunityPost({
@@ -65,6 +67,8 @@ class _CommunityStoryWidgetState extends State<CommunityStoryWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -73,20 +77,18 @@ class _CommunityStoryWidgetState extends State<CommunityStoryWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 '커뮤니티 이야기',
-                style: TextStyle(
-                  fontSize: 18,
+                style: AppTypography.subtitle.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF212121),
+                  color: colors.textPrimary,
                 ),
               ),
               Text(
                 '전체보기',
-                style: TextStyle(
-                  fontSize: 12,
+                style: AppTypography.small.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                  color: colors.primary,
                 ),
               ),
             ],
@@ -108,13 +110,13 @@ class _CommunityStoryWidgetState extends State<CommunityStoryWidget> {
                     const SizedBox(width: 8),
                     Text(
                       _post.author,
-                      style: const TextStyle(
-                        fontSize: 12,
+                      style: AppTypography.small.copyWith(
                         fontWeight: FontWeight.bold,
+                        color: colors.textPrimary,
                       ),
                     ),
                     const Spacer(),
-                    const Icon(Icons.more_horiz, size: 20),
+                    Icon(Icons.more_horiz, size: 20, color: colors.textSecondary),
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -144,18 +146,15 @@ class _CommunityStoryWidgetState extends State<CommunityStoryWidget> {
                                     ? Icons.favorite
                                     : Icons.favorite_border,
                                 key: ValueKey<bool>(_isLiked),
-                                color: _isLiked
-                                    ? Colors.red
-                                    : const Color(0xFF212121),
+                                color: _isLiked ? colors.error : colors.textPrimary,
                               ),
                             ),
                             const SizedBox(width: 6),
                             Text(
                               '$_likeCount',
-                              style: const TextStyle(
-                                fontSize: 13,
+                              style: AppTypography.label.copyWith(
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF212121),
+                                color: colors.textPrimary,
                               ),
                             ),
                           ],
@@ -163,9 +162,9 @@ class _CommunityStoryWidgetState extends State<CommunityStoryWidget> {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    const Icon(Icons.chat_bubble_outline),
+                    Icon(Icons.chat_bubble_outline, color: colors.textPrimary),
                     const SizedBox(width: 12),
-                    const Icon(Icons.send),
+                    Icon(Icons.send, color: colors.textPrimary),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -174,14 +173,16 @@ class _CommunityStoryWidgetState extends State<CommunityStoryWidget> {
                     children: [
                       TextSpan(
                         text: '${_post.author} ',
-                        style: const TextStyle(
+                        style: AppTypography.small.copyWith(
                           fontWeight: FontWeight.bold,
-                          fontSize: 12,
+                          color: colors.textPrimary,
                         ),
                       ),
                       TextSpan(
                         text: _post.content.split('\n').first,
-                        style: const TextStyle(fontSize: 12),
+                        style: AppTypography.small.copyWith(
+                          color: colors.textPrimary,
+                        ),
                       ),
                     ],
                   ),
@@ -204,6 +205,8 @@ class _CommunityPostDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -229,25 +232,23 @@ class _CommunityPostDialog extends StatelessWidget {
                         children: [
                           Text(
                             post.author,
-                            style: const TextStyle(
-                              fontSize: 14,
+                            style: AppTypography.caption.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF212121),
+                              color: colors.textPrimary,
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             post.createdAt,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey,
+                            style: AppTypography.small.copyWith(
+                              color: colors.textMuted,
                             ),
                           ),
                         ],
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.close),
+                      icon: Icon(Icons.close, color: colors.textSecondary),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
@@ -264,10 +265,9 @@ class _CommunityPostDialog extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: Text(
                   post.content,
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: AppTypography.caption.copyWith(
                     height: 1.6,
-                    color: Color(0xFF374151),
+                    color: colors.textSecondary,
                   ),
                 ),
               ),

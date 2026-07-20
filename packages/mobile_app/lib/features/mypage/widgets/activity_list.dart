@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:core/core/themes/app_colors.dart';
+import 'package:core/core/themes/app_typography.dart';
 
 /// 활동 목록 위젯
 class ActivityList extends StatelessWidget {
@@ -81,9 +82,9 @@ class _ActivityItem extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                  style: AppTypography.label.copyWith(
                     fontSize: 15,
+                    fontWeight: FontWeight.bold,
                     color: colors.textPrimary,
                   ),
                   maxLines: 1,
@@ -92,9 +93,8 @@ class _ActivityItem extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   desc,
-                  style: TextStyle(
+                  style: AppTypography.small.copyWith(
                     color: colors.textSecondary,
-                    fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
                   maxLines: 1,
@@ -106,9 +106,8 @@ class _ActivityItem extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             date,
-            style: TextStyle(
+            style: AppTypography.small.copyWith(
               color: colors.textMuted,
-              fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),
