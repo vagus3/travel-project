@@ -10,14 +10,16 @@ class LocalRecommendations extends StatelessWidget {
 
   static const _recommendations = <Map<String, Object>>[
     {
-      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCWSt2n8d0UpTjiuwSsuJE9WoroXrWdWl27Lb3WgRrtDtifF5BHUYX0aMtXX1LLNsWmlXTTSI8lLFSwTmYLQtDCQrX8z7L8dLAWEAjfRqdAiY934sIZAQ_UieUC-XoQ-XSSPRljRlRbGO7Nt_FZcBloj8v958lwqTMSncpVY-gxtRQp3fRNCfA8ZqWkKsYuBlFLgTQggIee9eNzttFz4BkmRCohFgkZIQbtZJZ0UtWjn4t5wDyGE-FL8AtNDgExI4uofYCLiZZ4WIQs',
+      'image':
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuCWSt2n8d0UpTjiuwSsuJE9WoroXrWdWl27Lb3WgRrtDtifF5BHUYX0aMtXX1LLNsWmlXTTSI8lLFSwTmYLQtDCQrX8z7L8dLAWEAjfRqdAiY934sIZAQ_UieUC-XoQ-XSSPRljRlRbGO7Nt_FZcBloj8v958lwqTMSncpVY-gxtRQp3fRNCfA8ZqWkKsYuBlFLgTQggIee9eNzttFz4BkmRCohFgkZIQbtZJZ0UtWjn4t5wDyGE-FL8AtNDgExI4uofYCLiZZ4WIQs',
       'title': '후시미 이나리 신사',
       'location': '교토 · 후시미구',
       'rating': 4.9,
       'reviewCount': 5820,
       'hours': '24시간 개방',
       'fee': '입장 무료',
-      'description': '수천 개의 붉은 도리이 게이트가 이어지는 신비로운 산길로 유명한 신사입니다. '
+      'description':
+          '수천 개의 붉은 도리이 게이트가 이어지는 신비로운 산길로 유명한 신사입니다. '
           '이나리산 전체가 신사 영역으로, 정상까지 약 2~3시간이 소요되는 하이킹 코스를 따라 걸으며 '
           '일본 전통 신앙과 자연을 동시에 체험할 수 있습니다.',
       'tags': ['신사', '하이킹', '포토스팟', '역사', '무료입장'],
@@ -28,7 +30,8 @@ class LocalRecommendations extends StatelessWidget {
       ],
     },
     {
-      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuAdmNyqIK80mWXaNbl4M9r6P4nwBpTW8HWXg2Cl058P2qv94jZdIO6amXwX2bWinL081CIlPa5bbS4BDBUcoaVF4CeY8ELYh7CayS6aOSvwu031iGlikj3ZKrk9m9npbHZGe6qW7_DsEimpiMuJVPds5AA09A_r9R5873gP9mtCg6BvZcw4pOBktUjQsho8A8kQrst4eQxfNJPONc51pNBPhT-GK_2Z5CuMNXr-J4jkPV-Zg-Gut1f6vxwN-VJN5_jFdbEnFgMWbyFr',
+      'image':
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuAdmNyqIK80mWXaNbl4M9r6P4nwBpTW8HWXg2Cl058P2qv94jZdIO6amXwX2bWinL081CIlPa5bbS4BDBUcoaVF4CeY8ELYh7CayS6aOSvwu031iGlikj3ZKrk9m9npbHZGe6qW7_DsEimpiMuJVPds5AA09A_r9R5873gP9mtCg6BvZcw4pOBktUjQsho8A8kQrst4eQxfNJPONc51pNBPhT-GK_2Z5CuMNXr-J4jkPV-Zg-Gut1f6vxwN-VJN5_jFdbEnFgMWbyFr',
       'title': '금각사 (킨카쿠지)',
       'location': '교토 · 키타구',
       'rating': 4.8,
@@ -44,7 +47,8 @@ class LocalRecommendations extends StatelessWidget {
       ],
     },
     {
-      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCoOaBHK_HQ1nuagP2kxm-TH3YBIH2cxwEiZ-T8Fqk_gdN-O970DadR22lQNUB3UMwdapYIespcxLr_pRXDL8OJteK9p43aTL5qaU2s0LZvohVkiq4cbvCxmjNuZ7e4mBEKWEjOZAyH-cMB7C7_MtfE1eX9xA-ENxQdg-C6FhkUFtaKldt4mLVTxGZ5S_XnMVf97_zXMvXunZVZ_OTZilDYeCROtcUE16GWS2WPoJtGjdp50WyfjujSON4e9pC-wOfXbqgT1-KPxx5G',
+      'image':
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuCoOaBHK_HQ1nuagP2kxm-TH3YBIH2cxwEiZ-T8Fqk_gdN-O970DadR22lQNUB3UMwdapYIespcxLr_pRXDL8OJteK9p43aTL5qaU2s0LZvohVkiq4cbvCxmjNuZ7e4mBEKWEjOZAyH-cMB7C7_MtfE1eX9xA-ENxQdg-C6FhkUFtaKldt4mLVTxGZ5S_XnMVf97_zXMvXunZVZ_OTZilDYeCROtcUE16GWS2WPoJtGjdp50WyfjujSON4e9pC-wOfXbqgT1-KPxx5G',
       'title': '아라시야마 대나무 숲',
       'location': '교토 · 우쿄구',
       'rating': 4.7,
@@ -60,14 +64,16 @@ class LocalRecommendations extends StatelessWidget {
       ],
     },
     {
-      'image': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFoA2UwWEes8xJabLIpixkZ-R_muV8L7yHsYJZY0iBp9a94TEB759nk5D9bvVj5ZrfnGUQwZHVaFvpCe3EkK_OIcv7Q7c2hfD1IrN6trcuXJ0HjbsR9XrW0NHF8KeGse5ajwyL8eGKUR7eG7lIrIPQZ_gaVNeRSg7FH6VyLHVPswUlNfefJTfSPVLVefKaGoaoY7fswRmp12IQKTHqAJxeDfpnCj2qBFLwt5CQAR_LwV6dD9dxJGiVGkAokOj8Ba4PxS7caPW5jj5K',
+      'image':
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuBFoA2UwWEes8xJabLIpixkZ-R_muV8L7yHsYJZY0iBp9a94TEB759nk5D9bvVj5ZrfnGUQwZHVaFvpCe3EkK_OIcv7Q7c2hfD1IrN6trcuXJ0HjbsR9XrW0NHF8KeGse5ajwyL8eGKUR7eG7lIrIPQZ_gaVNeRSg7FH6VyLHVPswUlNfefJTfSPVLVefKaGoaoY7fswRmp12IQKTHqAJxeDfpnCj2qBFLwt5CQAR_LwV6dD9dxJGiVGkAokOj8Ba4PxS7caPW5jj5K',
       'title': '기요미즈데라',
       'location': '교토 · 히가시야마구',
       'rating': 4.9,
       'reviewCount': 9100,
       'hours': '06:00 ~ 18:00',
       'fee': '성인 400엔',
-      'description': '교토 동쪽 히가시야마 구릉에 자리한 유네스코 세계문화유산으로, 못을 전혀 사용하지 않고 지어진 목조 무대가 특징입니다.',
+      'description':
+          '교토 동쪽 히가시야마 구릉에 자리한 유네스코 세계문화유산으로, 못을 전혀 사용하지 않고 지어진 목조 무대가 특징입니다.',
       'tags': ['세계문화유산', '사원', '전망', '역사', '벚꽃명소'],
       'tips': [
         {'icon': '🌸', 'text': '봄 벚꽃 시즌에 야간 라이트업 이벤트 진행'},
@@ -121,7 +127,8 @@ class LocalRecommendations extends StatelessWidget {
               return GestureDetector(
                 onTap: () => Navigator.of(context).push(
                   PageRouteBuilder<void>(
-                    pageBuilder: (ctx, a1, a2) => PlaceDetailScreen(place: item),
+                    pageBuilder: (ctx, a1, a2) =>
+                        PlaceDetailScreen(place: item),
                     transitionsBuilder: (_, animation, a2, child) {
                       final tween = Tween(
                         begin: const Offset(0, 1),

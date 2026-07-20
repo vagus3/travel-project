@@ -141,5 +141,6 @@ class AppColors extends ThemeExtension<AppColors> {
 /// BuildContext 확장을 통해 AppColors에 쉽게 접근합니다.
 extension AppColorsExtension on BuildContext {
   /// AppColors getter
-  AppColors get colors => Theme.of(this).extension<AppColors>() ?? AppColors.light;
+  AppColors get colors =>
+      Theme.of(this).extension<AppColors>() ?? AppColors.light;
 }

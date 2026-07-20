@@ -64,7 +64,10 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.calendar_today_outlined, color: colors.textPrimary),
+            icon: Icon(
+              Icons.calendar_today_outlined,
+              color: colors.textPrimary,
+            ),
             onPressed: () => _selectDate(context),
           ),
         ],
@@ -81,7 +84,9 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      CurrentWeatherWidget(currentWeather: data.currentWeather!),
+                      CurrentWeatherWidget(
+                        currentWeather: data.currentWeather!,
+                      ),
                       const SizedBox(height: 40),
                       DailyForecastWidget(dailyForecast: data.dailyForecast),
                       const SizedBox(height: 40),

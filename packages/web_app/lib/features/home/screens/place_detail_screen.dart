@@ -13,30 +13,30 @@ class PlaceDetailScreen extends StatelessWidget {
     final String title = place['title'] as String? ?? '';
     final String image = place['image'] as String? ?? '';
     final String location = place['location'] as String? ?? '교토';
-    final String description = place['description'] as String? ??
+    final String description =
+        place['description'] as String? ??
         '이곳은 일본 교토를 대표하는 명소 중 하나로, 매년 수백만 명의 관광객이 방문하는 인기 여행지입니다. '
             '아름다운 전통 건축물과 자연경관이 조화를 이루며, 일본의 역사와 문화를 깊이 체험할 수 있습니다.';
     final double rating = (place['rating'] as num?)?.toDouble() ?? 4.8;
     final int reviewCount = (place['reviewCount'] as int?) ?? 2341;
     final String hours = place['hours'] as String? ?? '06:00 ~ 18:00';
     final String fee = place['fee'] as String? ?? '입장 무료';
-    final List<String> tags = (place['tags'] as List<dynamic>?)
-            ?.map((e) => e.toString())
-            .toList() ??
+    final List<String> tags =
+        (place['tags'] as List<dynamic>?)?.map((e) => e.toString()).toList() ??
         ['역사', '전통', '자연', '포토스팟'];
     final List<Map<String, String>> tips =
         (place['tips'] as List<dynamic>?)?.map((e) {
-              final m = e as Map;
-              return {
-                'icon': m['icon']?.toString() ?? '💡',
-                'text': m['text']?.toString() ?? '',
-              };
-            }).toList() ??
-            [
-              {'icon': '🌅', 'text': '이른 아침 방문 시 인파가 적어 여유롭게 감상 가능'},
-              {'icon': '📸', 'text': '일출 직후 황금빛 빛이 들어오는 시간대가 최고 포토타임'},
-              {'icon': '👟', 'text': '계단이 많으니 편한 신발 착용 권장'},
-            ];
+          final m = e as Map;
+          return {
+            'icon': m['icon']?.toString() ?? '💡',
+            'text': m['text']?.toString() ?? '',
+          };
+        }).toList() ??
+        [
+          {'icon': '🌅', 'text': '이른 아침 방문 시 인파가 적어 여유롭게 감상 가능'},
+          {'icon': '📸', 'text': '일출 직후 황금빛 빛이 들어오는 시간대가 최고 포토타임'},
+          {'icon': '👟', 'text': '계단이 많으니 편한 신발 착용 권장'},
+        ];
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
@@ -57,8 +57,11 @@ class PlaceDetailScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) => Container(
                       color: const Color(0xFFCFD8DC),
-                      child: const Icon(Icons.image_not_supported,
-                          size: 60, color: Colors.white),
+                      child: const Icon(
+                        Icons.image_not_supported,
+                        size: 60,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   // 그라디언트 오버레이
@@ -86,7 +89,9 @@ class PlaceDetailScreen extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 4),
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFF004AAD).withOpacity(0.85),
                             borderRadius: BorderRadius.circular(20),
@@ -109,9 +114,10 @@ class PlaceDetailScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             shadows: [
                               Shadow(
-                                  color: Colors.black45,
-                                  blurRadius: 8,
-                                  offset: Offset(0, 2))
+                                color: Colors.black45,
+                                blurRadius: 8,
+                                offset: Offset(0, 2),
+                              ),
                             ],
                           ),
                         ),
@@ -189,8 +195,10 @@ class PlaceDetailScreen extends StatelessWidget {
                           ),
                         );
                       },
-                      icon: const Icon(Icons.add_circle_outline,
-                          color: Colors.white),
+                      icon: const Icon(
+                        Icons.add_circle_outline,
+                        color: Colors.white,
+                      ),
                       label: const Text(
                         '내 일정에 추가',
                         style: TextStyle(
@@ -280,8 +288,11 @@ class _RatingRow extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        const Icon(Icons.location_on_outlined,
-            color: Color(0xFF617C89), size: 16),
+        const Icon(
+          Icons.location_on_outlined,
+          color: Color(0xFF617C89),
+          size: 16,
+        ),
         const SizedBox(width: 2),
         const Text(
           '일본 · 교토',
@@ -304,8 +315,7 @@ class _TagRow extends StatelessWidget {
       children: tags
           .map(
             (tag) => Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
                 color: const Color(0xFFE3F0FF),
                 borderRadius: BorderRadius.circular(20),
@@ -368,8 +378,11 @@ class _InfoRow extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
-  const _InfoRow(
-      {required this.icon, required this.label, required this.value});
+  const _InfoRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -387,15 +400,19 @@ class _InfoRow extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label,
-                style: const TextStyle(
-                    fontSize: 11, color: Color(0xFF9E9E9E))),
+            Text(
+              label,
+              style: const TextStyle(fontSize: 11, color: Color(0xFF9E9E9E)),
+            ),
             const SizedBox(height: 2),
-            Text(value,
-                style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF212121))),
+            Text(
+              value,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF212121),
+              ),
+            ),
           ],
         ),
       ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:core/features/schedule/models/schedule_model.dart';
 
 class ScheduleCard extends StatelessWidget {
-
   const ScheduleCard({super.key, required this.schedule, required this.onTap});
   final ScheduleSummary schedule;
   final VoidCallback onTap;

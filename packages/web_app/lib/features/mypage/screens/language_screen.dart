@@ -21,7 +21,11 @@ class LanguageScreen extends StatelessWidget {
 
   static const _options = <_LanguageOption>[
     _LanguageOption(label: '한국어', subtitle: 'Korean', locale: Locale('ko')),
-    _LanguageOption(label: 'English', subtitle: 'English', locale: Locale('en')),
+    _LanguageOption(
+      label: 'English',
+      subtitle: 'English',
+      locale: Locale('en'),
+    ),
     _LanguageOption(label: '日本語', subtitle: 'Japanese', locale: Locale('ja')),
   ];
 
@@ -78,10 +82,18 @@ class LanguageScreen extends StatelessWidget {
                   InkWell(
                     onTap: () => context.setLocale(option.locale),
                     borderRadius: BorderRadius.only(
-                      topLeft: index == 0 ? const Radius.circular(16) : Radius.zero,
-                      topRight: index == 0 ? const Radius.circular(16) : Radius.zero,
-                      bottomLeft: isLast ? const Radius.circular(16) : Radius.zero,
-                      bottomRight: isLast ? const Radius.circular(16) : Radius.zero,
+                      topLeft: index == 0
+                          ? const Radius.circular(16)
+                          : Radius.zero,
+                      topRight: index == 0
+                          ? const Radius.circular(16)
+                          : Radius.zero,
+                      bottomLeft: isLast
+                          ? const Radius.circular(16)
+                          : Radius.zero,
+                      bottomRight: isLast
+                          ? const Radius.circular(16)
+                          : Radius.zero,
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -144,7 +156,8 @@ class LanguageScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (!isLast) Divider(height: 1, thickness: 1, color: colors.border),
+                  if (!isLast)
+                    Divider(height: 1, thickness: 1, color: colors.border),
                 ],
               );
             }).toList(),

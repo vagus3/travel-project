@@ -44,9 +44,18 @@ class NewsArticle {
       final parts = pubDate.split(' ');
       final normalized = '${parts[1]} ${parts[2]} ${parts[3]} ${parts[4]}';
       const months = {
-        'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
-        'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
-        'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12',
+        'Jan': '01',
+        'Feb': '02',
+        'Mar': '03',
+        'Apr': '04',
+        'May': '05',
+        'Jun': '06',
+        'Jul': '07',
+        'Aug': '08',
+        'Sep': '09',
+        'Oct': '10',
+        'Nov': '11',
+        'Dec': '12',
       };
       final m = RegExp(
         r'(\d+) (\w+) (\d{4}) (\d+):(\d+):(\d+)',

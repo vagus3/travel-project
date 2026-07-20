@@ -30,5 +30,5 @@ class TravelPostController extends AsyncNotifier<List<PostData>> {
 /// 여행 포스트 목록 Provider
 final travelPostsProvider =
     AsyncNotifierProvider<TravelPostController, List<PostData>>(
-  TravelPostController.new,
-);
+      TravelPostController.new,
+    );

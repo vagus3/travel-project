@@ -13,7 +13,9 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController(text: '김여행');
-  final _emailController = TextEditingController(text: 'traveler_kim@email.com');
+  final _emailController = TextEditingController(
+    text: 'traveler_kim@email.com',
+  );
   final _passwordController = TextEditingController();
   final _passwordConfirmController = TextEditingController();
 
@@ -243,7 +245,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget _buildCard({required AppColors colors, required List<Widget> children}) {
+  Widget _buildCard({
+    required AppColors colors,
+    required List<Widget> children,
+  }) {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: colors.surface,

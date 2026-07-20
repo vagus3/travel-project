@@ -11,7 +11,8 @@ class RegionSelectionWidget extends ConsumerStatefulWidget {
   const RegionSelectionWidget({super.key});
 
   @override
-  ConsumerState<RegionSelectionWidget> createState() => _RegionSelectionWidgetState();
+  ConsumerState<RegionSelectionWidget> createState() =>
+      _RegionSelectionWidgetState();
 }
 
 class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
@@ -52,7 +53,9 @@ class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
   void _onSearch() {
     final location = _locationController.text.trim();
     if (location.isNotEmpty) {
-      ref.read(travelConfigurationProvider.notifier).setConfiguration(
+      ref
+          .read(travelConfigurationProvider.notifier)
+          .setConfiguration(
             _selectedDateRange,
             location,
           );
@@ -72,7 +75,11 @@ class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
         color: colors.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 2)),
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 10,
+            offset: Offset(0, 2),
+          ),
         ],
       ),
       child: Column(
@@ -107,7 +114,7 @@ class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
                           _selectedDateRange == null
                               ? '날짜를 선택하세요'
                               : '${DateFormat('yyyy.MM.dd').format(_selectedDateRange!.start)} ~ '
-                                  '${DateFormat('yyyy.MM.dd').format(_selectedDateRange!.end)}',
+                                    '${DateFormat('yyyy.MM.dd').format(_selectedDateRange!.end)}',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -142,7 +149,8 @@ class _RegionSelectionWidgetState extends ConsumerState<RegionSelectionWidget> {
                         ),
                       ),
                       child: CalendarDatePicker(
-                        initialDate: _selectedDateRange?.start ?? DateTime.now(),
+                        initialDate:
+                            _selectedDateRange?.start ?? DateTime.now(),
                         firstDate: DateTime.now(),
                         lastDate: DateTime.now().add(const Duration(days: 365)),
                         onDateChanged: _onDateChanged,

@@ -30,7 +30,11 @@ class ProfileCard extends StatelessWidget {
           const SizedBox(height: 12),
           const Text(
             '김여행',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
           const Text(
             'traveler_kim@email.com',

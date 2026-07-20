@@ -66,5 +66,5 @@ class ScheduleController extends Notifier<List<ScheduleSummary>> {
 /// (Provider) 최신 Riverpod 방식의 프로바이더
 final scheduleControllerProvider =
     NotifierProvider<ScheduleController, List<ScheduleSummary>>(
-  ScheduleController.new,
-);
+      ScheduleController.new,
+    );

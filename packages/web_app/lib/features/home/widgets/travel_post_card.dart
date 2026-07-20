@@ -196,8 +196,7 @@ class CommunityPostDetailScreen extends StatefulWidget {
       _CommunityPostDetailScreenState();
 }
 
-class _CommunityPostDetailScreenState
-    extends State<CommunityPostDetailScreen> {
+class _CommunityPostDetailScreenState extends State<CommunityPostDetailScreen> {
   final _inputController = TextEditingController();
   late int _likeCount;
   bool _isLiked = false;
@@ -284,8 +283,11 @@ class _CommunityPostDetailScreenState
                           fit: BoxFit.cover,
                           errorBuilder: (_, __, ___) => Container(
                             color: const Color(0xFFCFD8DC),
-                            child: const Icon(Icons.image_not_supported,
-                                size: 60, color: Colors.white),
+                            child: const Icon(
+                              Icons.image_not_supported,
+                              size: 60,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         const DecoratedBox(
@@ -315,8 +317,7 @@ class _CommunityPostDetailScreenState
                       children: [
                         CircleAvatar(
                           radius: 22,
-                          backgroundImage:
-                              NetworkImage(post.profileImageUrl),
+                          backgroundImage: NetworkImage(post.profileImageUrl),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
@@ -351,11 +352,12 @@ class _CommunityPostDetailScreenState
                             child: Row(
                               children: [
                                 AnimatedSwitcher(
-                                  duration:
-                                      const Duration(milliseconds: 180),
+                                  duration: const Duration(milliseconds: 180),
                                   transitionBuilder: (child, anim) =>
                                       ScaleTransition(
-                                          scale: anim, child: child),
+                                        scale: anim,
+                                        child: child,
+                                      ),
                                   child: Icon(
                                     _isLiked
                                         ? Icons.favorite
@@ -483,8 +485,7 @@ class _CommunityPostDetailScreenState
                         onSubmitted: (_) => _send(),
                         decoration: const InputDecoration(
                           hintText: '댓글을 입력하세요',
-                          hintStyle:
-                              TextStyle(color: Color(0xFFAAAAAA)),
+                          hintStyle: TextStyle(color: Color(0xFFAAAAAA)),
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(
                             horizontal: 18,
@@ -672,8 +673,11 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) => Container(
                       color: const Color(0xFFCFD8DC),
-                      child: const Icon(Icons.image_not_supported,
-                          size: 48, color: Colors.white),
+                      child: const Icon(
+                        Icons.image_not_supported,
+                        size: 48,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -705,8 +709,11 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                         color: Colors.black.withOpacity(0.45),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.close,
-                          color: Colors.white, size: 18),
+                      child: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 18,
+                      ),
                     ),
                   ),
                 ),
@@ -725,8 +732,7 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                       children: [
                         CircleAvatar(
                           radius: 20,
-                          backgroundImage:
-                              NetworkImage(post.profileImageUrl),
+                          backgroundImage: NetworkImage(post.profileImageUrl),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
@@ -761,11 +767,12 @@ class _PostDetailDialogState extends State<_PostDetailDialog> {
                             child: Row(
                               children: [
                                 AnimatedSwitcher(
-                                  duration:
-                                      const Duration(milliseconds: 180),
+                                  duration: const Duration(milliseconds: 180),
                                   transitionBuilder: (child, anim) =>
                                       ScaleTransition(
-                                          scale: anim, child: child),
+                                        scale: anim,
+                                        child: child,
+                                      ),
                                   child: Icon(
                                     _isLiked
                                         ? Icons.favorite
@@ -978,8 +985,7 @@ class TravelPostFeed extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Text(
               '포스트를 불러오지 못했습니다.\n$err',
-              style:
-                  const TextStyle(color: Color(0xFF617C89), fontSize: 13),
+              style: const TextStyle(color: Color(0xFF617C89), fontSize: 13),
             ),
           ),
         ),

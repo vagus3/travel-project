@@ -31,8 +31,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
 
   /// 환영 메시지에 표시할 사용자 이름 (TODO: 실제 사용자 상태로 대체)
   static const _userName = '김여행';
-  static const _welcomeMessage =
-      '안녕하세요 $_userName님.\n오늘은 어떤 여행을 계획하실건가요?';
+  static const _welcomeMessage = '안녕하세요 $_userName님.\n오늘은 어떤 여행을 계획하실건가요?';
 
   @override
   void initState() {
@@ -303,9 +302,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               child: FilledButton.icon(
                 onPressed: () {
-                  ref
-                      .read(hanillControllerProvider.notifier)
-                      .createNewThread();
+                  ref.read(hanillControllerProvider.notifier).createNewThread();
                   setState(() => _isSidebarOpen = false);
                 },
                 icon: const Icon(Icons.add_rounded, size: 18),
@@ -352,9 +349,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
           onTap: () {
-            ref
-                .read(hanillControllerProvider.notifier)
-                .switchThread(thread.id);
+            ref.read(hanillControllerProvider.notifier).switchThread(thread.id);
             setState(() => _isSidebarOpen = false);
           },
           child: Padding(
@@ -401,8 +396,11 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                       value: 'delete',
                       child: Row(
                         children: [
-                          Icon(Icons.delete_outline_rounded,
-                              size: 18, color: Colors.redAccent),
+                          Icon(
+                            Icons.delete_outline_rounded,
+                            size: 18,
+                            color: Colors.redAccent,
+                          ),
                           SizedBox(width: 8),
                           Text(
                             '삭제',
@@ -433,7 +431,10 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: AnimatedBuilder(
-          animation: Listenable.merge([_typewriterController, _cursorController]),
+          animation: Listenable.merge([
+            _typewriterController,
+            _cursorController,
+          ]),
           builder: (_, _) {
             final length =
                 (_welcomeMessage.length * _typewriterController.value).round();
@@ -455,9 +456,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                   TextSpan(
                     text: '|',
                     style: TextStyle(
-                      color: cursorVisible
-                          ? _primaryPink
-                          : Colors.transparent,
+                      color: cursorVisible ? _primaryPink : Colors.transparent,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -490,12 +489,14 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Column(
-        crossAxisAlignment:
-            isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment: isUser
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment:
-                isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+            mainAxisAlignment: isUser
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               if (!isUser) ...[
@@ -539,8 +540,7 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                     child: Text(
                       message.content,
                       style: TextStyle(
-                        color:
-                            isUser ? Colors.white : const Color(0xFF1A1A2E),
+                        color: isUser ? Colors.white : const Color(0xFF1A1A2E),
                         fontSize: 15,
                         height: 1.5,
                       ),
@@ -760,8 +760,10 @@ class _HanillScreenState extends ConsumerState<HanillScreen>
                 ),
               ),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 6,
+                ),
                 child: Text(
                   s,
                   style: const TextStyle(

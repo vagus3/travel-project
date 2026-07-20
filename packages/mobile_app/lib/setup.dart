@@ -69,7 +69,9 @@ class AppSetup {
       };
 
       // ── Firebase Messaging ──
-      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+      FirebaseMessaging.onBackgroundMessage(
+        _firebaseMessagingBackgroundHandler,
+      );
       await _initializeLocalNotifications();
       await _requestNotificationPermission();
       _listenForegroundMessages();
@@ -105,7 +107,8 @@ class AppSetup {
     // Android 알림 채널 생성
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(_androidChannel);
   }
 

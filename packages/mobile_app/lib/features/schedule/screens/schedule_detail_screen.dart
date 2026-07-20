@@ -18,17 +18,11 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
   var _selectedDay = 1;
 
   List<int> get _days {
-    return widget.schedule.details
-        .map((d) => d.day)
-        .toSet()
-        .toList()
-      ..sort();
+    return widget.schedule.details.map((d) => d.day).toSet().toList()..sort();
   }
 
   List<ScheduleDetail> get _currentDayDetails {
-    return widget.schedule.details
-        .where((d) => d.day == _selectedDay)
-        .toList();
+    return widget.schedule.details.where((d) => d.day == _selectedDay).toList();
   }
 
   /// Google Maps Static API URL 생성
@@ -149,8 +143,7 @@ class _ScheduleDetailScreenState extends State<ScheduleDetailScreen> {
                             return Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: GestureDetector(
-                                onTap: () =>
-                                    setState(() => _selectedDay = day),
+                                onTap: () => setState(() => _selectedDay = day),
                                 child: Chip(
                                   label: Text(
                                     'Day $day',

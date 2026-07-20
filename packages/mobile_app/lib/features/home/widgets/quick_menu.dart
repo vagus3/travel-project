@@ -9,11 +9,31 @@ class QuickMenuWidget extends StatelessWidget {
   const QuickMenuWidget({super.key});
 
   static const _menus = <_QuickMenuItem>[
-    _QuickMenuItem(icon: Icons.flight, label: '항공권', url: 'https://www.agoda.com/flights'),
-    _QuickMenuItem(icon: Icons.hotel, label: '숙소', url: 'https://www.agoda.com/'),
-    _QuickMenuItem(icon: Icons.local_activity, label: '투어·티켓', url: 'https://www.agoda.com/activities'),
-    _QuickMenuItem(icon: Icons.directions_car, label: '렌터카', url: 'https://www.agoda.com/transport'),
-    _QuickMenuItem(icon: Icons.security, label: '보험', url: 'https://www.agoda.com/'),
+    _QuickMenuItem(
+      icon: Icons.flight,
+      label: '항공권',
+      url: 'https://www.agoda.com/flights',
+    ),
+    _QuickMenuItem(
+      icon: Icons.hotel,
+      label: '숙소',
+      url: 'https://www.agoda.com/',
+    ),
+    _QuickMenuItem(
+      icon: Icons.local_activity,
+      label: '투어·티켓',
+      url: 'https://www.agoda.com/activities',
+    ),
+    _QuickMenuItem(
+      icon: Icons.directions_car,
+      label: '렌터카',
+      url: 'https://www.agoda.com/transport',
+    ),
+    _QuickMenuItem(
+      icon: Icons.security,
+      label: '보험',
+      url: 'https://www.agoda.com/',
+    ),
   ];
 
   Future<void> _openUrl(BuildContext context, String url) async {
@@ -39,12 +59,18 @@ class QuickMenuWidget extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: _menus.map((menu) => _buildItem(context, colors, menu)).toList(),
+        children: _menus
+            .map((menu) => _buildItem(context, colors, menu))
+            .toList(),
       ),
     );
   }
 
-  Widget _buildItem(BuildContext context, AppColors colors, _QuickMenuItem menu) {
+  Widget _buildItem(
+    BuildContext context,
+    AppColors colors,
+    _QuickMenuItem menu,
+  ) {
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: () => _openUrl(context, menu.url),
@@ -58,7 +84,11 @@ class QuickMenuWidget extends StatelessWidget {
               color: colors.surface,
               shape: BoxShape.circle,
               boxShadow: const [
-                BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2)),
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 4,
+                  offset: Offset(0, 2),
+                ),
               ],
             ),
             child: Icon(menu.icon, color: colors.primary, size: 24),
@@ -79,7 +109,11 @@ class QuickMenuWidget extends StatelessWidget {
 }
 
 class _QuickMenuItem {
-  const _QuickMenuItem({required this.icon, required this.label, required this.url});
+  const _QuickMenuItem({
+    required this.icon,
+    required this.label,
+    required this.url,
+  });
 
   final IconData icon;
   final String label;

@@ -108,8 +108,7 @@ Future<Response> _hanillChatHandler(Request request) async {
 
   final Map<String, dynamic> payload;
   try {
-    payload =
-        jsonDecode(await request.readAsString()) as Map<String, dynamic>;
+    payload = jsonDecode(await request.readAsString()) as Map<String, dynamic>;
   } on FormatException {
     return _jsonResponse(400, {'error': '잘못된 요청 본문입니다.'});
   }
@@ -173,7 +172,9 @@ Future<Response> _hanillChatHandler(Request request) async {
 Future<Response> _weatherCurrentHandler(Request request) async {
   final apiKey = _env['OPENWEATHER_API_KEY'] ?? '';
   if (apiKey.isEmpty) {
-    return _jsonResponse(500, {'error': '서버에 OPENWEATHER_API_KEY가 설정되지 않았습니다.'});
+    return _jsonResponse(500, {
+      'error': '서버에 OPENWEATHER_API_KEY가 설정되지 않았습니다.',
+    });
   }
   final city = request.url.queryParameters['city'];
   if (city == null || city.isEmpty) {
@@ -199,7 +200,9 @@ Future<Response> _weatherCurrentHandler(Request request) async {
 Future<Response> _weatherForecastHandler(Request request) async {
   final apiKey = _env['OPENWEATHER_API_KEY'] ?? '';
   if (apiKey.isEmpty) {
-    return _jsonResponse(500, {'error': '서버에 OPENWEATHER_API_KEY가 설정되지 않았습니다.'});
+    return _jsonResponse(500, {
+      'error': '서버에 OPENWEATHER_API_KEY가 설정되지 않았습니다.',
+    });
   }
   final city = request.url.queryParameters['city'];
   if (city == null || city.isEmpty) {

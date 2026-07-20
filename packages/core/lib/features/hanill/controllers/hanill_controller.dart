@@ -109,7 +109,8 @@ class HanillController extends Notifier<HanillState> {
 
     // 스레드 제목은 첫 메시지로 자동 설정
     final currentThread = state.activeThread;
-    final autoTitle = (currentThread != null &&
+    final autoTitle =
+        (currentThread != null &&
             currentThread.title == '새 대화' &&
             currentThread.messages.isEmpty)
         ? _truncate(text.trim(), 22)
@@ -128,7 +129,9 @@ class HanillController extends Notifier<HanillState> {
 
     try {
       // 방금 추가한 사용자 메시지까지 포함된 현재 스레드 기록 전체 전송
-      final history = state.threads.firstWhere((t) => t.id == activeId).messages;
+      final history = state.threads
+          .firstWhere((t) => t.id == activeId)
+          .messages;
       final rawText = await _repository.sendChat(
         systemPrompt: _systemPrompt,
         history: history,
@@ -150,7 +153,8 @@ class HanillController extends Notifier<HanillState> {
     } on Exception catch (e) {
       final errMsg = ChatMessage(
         role: MessageRole.assistant,
-        content: '오류가 발생했어요: $e\napi_proxy 서버가 켜져 있는지, .env의 API_PROXY_BASE_URL이 맞는지 확인해주세요.',
+        content:
+            '오류가 발생했어요: $e\napi_proxy 서버가 켜져 있는지, .env의 API_PROXY_BASE_URL이 맞는지 확인해주세요.',
       );
       state = state.copyWith(
         threads: _patchThread(
@@ -193,8 +197,7 @@ class HanillController extends Notifier<HanillState> {
 
   /// ```schedule...``` 블록 파싱
   GeneratedSchedule? _parseSchedule(String text) {
-    final match =
-        RegExp(r'```schedule\s*([\s\S]*?)\s*```').firstMatch(text);
+    final match = RegExp(r'```schedule\s*([\s\S]*?)\s*```').firstMatch(text);
     if (match == null) {
       return null;
     }
@@ -215,5 +218,5 @@ class HanillController extends Notifier<HanillState> {
 /// 한일이 컨트롤러 Provider
 final hanillControllerProvider =
     NotifierProvider<HanillController, HanillState>(
-  HanillController.new,
-);
+      HanillController.new,
+    );
