@@ -1,0 +1,35 @@
+name: travel_project
+
+packages:
+  - packages/**
+
+command:
+  bootstrap:
+    usePubspecOverrides: false
+
+scripts:
+  analyze:
+    run: melos exec -- flutter analyze
+    description: Run flutter analyze in every package.
+
+  test:
+    run: melos exec --dir-exists="test" -- flutter test
+    description: Run flutter test in packages that have a test/ directory.
+
+  codegen:
+    run: dart run build_runner build --delete-conflicting-outputs
+    packageFilters:
+      scope: core
+    description: Regenerate riverpod_generator (.g.dart) output in core.
+
+  build:mobile:
+    run: flutter build apk
+    packageFilters:
+      scope: mobile_app
+    description: Build the Android APK.
+
+  build:web:
+    run: flutter build web
+    packageFilters:
+      scope: web_app
+    description: Build the web release bundle.

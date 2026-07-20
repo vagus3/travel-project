@@ -1,0 +1,20 @@
+name: api_proxy
+description: travel-project 외부 API 프록시 백엔드 — NVIDIA NIM/OpenWeatherMap/Naver 키를 서버에서만 보관하고 클라이언트 요청을 대신 전달합니다.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.8.1
+
+# 순수 Dart 패키지 — Flutter 워크스페이스(루트 pubspec.yaml)의 workspace 멤버가 아닙니다.
+# core/mobile_app/web_app 와 독립적으로 빌드·배포되는 서버이기 때문입니다.
+
+dependencies:
+  shelf: ^1.4.1
+  shelf_router: ^1.1.4
+  http: ^1.5.0
+  dotenv: ^4.2.0
+
+dev_dependencies:
+  test: ^1.24.0
+  lints: ^5.0.0

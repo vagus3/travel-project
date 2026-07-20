@@ -1,0 +1,32 @@
+# 로컬 개발용 Docker Compose 구성
+#
+# 사용법:
+#   1. packages/api_proxy/.env 에 실제 API 키(NVIDIA/OpenWeather/Naver) 입력
+#   2. docker compose up --build
+#   3. 웹: http://localhost:8081 , 프록시 헬스체크: http://localhost:8080/healthz
+
+services:
+  api_proxy:
+    build:
+      context: ./packages/api_proxy
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./packages/api_proxy/.env
+    healthcheck:
+      # 최종 이미지가 scratch 기반이라 curl/wget이 없어, 같은 실행 파일의
+      # --healthcheck 모드를 대신 사용합니다.
+      test: ["CMD", "/app/bin/server", "--healthcheck"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  web:
+    build:
+      context: .
+      dockerfile: packages/web_app/Dockerfile
+    ports:
+      - "8081:80"
+    depends_on:
+      api_proxy:
+        condition: service_healthy

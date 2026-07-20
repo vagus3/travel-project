@@ -1,0 +1,27 @@
+# web_app Docker 빌드(컨텍스트 = 저장소 루트)에서 불필요한 대용량/무관 파일 제외
+
+.git/
+.dart_tool/
+build/
+**/build/
+.idea/
+.vscode/
+.claude/
+.gemini/
+docs/
+
+packages/mobile_app/android/
+packages/mobile_app/ios/
+packages/mobile_app/.dart_tool/
+packages/mobile_app/build/
+packages/core/.dart_tool/
+packages/core/build/
+packages/web_app/.dart_tool/
+packages/web_app/build/
+packages/api_proxy/.dart_tool/
+packages/api_proxy/build/
+packages/api_proxy/bin/server
+
+*.log
+*.iml
+custom_lint.log
